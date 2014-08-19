@@ -72,13 +72,12 @@
     
     //address formatting button logic
     if(self.venue.address3 != nil){
-        self.addressLabel.text = [NSString stringWithFormat:@"%@ %@ %@ %@, %@", self.venue.address1,self.venue.address2,self.venue.address3, self.venue.city, self.venue.state];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@ %@, %@", self.venue.address1,self.venue.address2,self.venue.address3, self.venue.city, self.venue.state];
     } else if(self.venue.address2 != nil){
-        self.addressLabel.text = [NSString stringWithFormat:@"%@ %@ %@, %@", self.venue.address1,self.venue.address2, self.venue.city, self.venue.state];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@, %@", self.venue.address1,self.venue.address2, self.venue.city, self.venue.state];
     } else {
-        self.addressLabel.text = [NSString stringWithFormat:@"%@ %@, %@", self.venue.address1, self.venue.city, self.venue.state];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@, %@", self.venue.address1, self.venue.city, self.venue.state];
     }
-    self.addressLabel.lineBreakMode = 0;
     NSLog(@"%@", self.addressLabel.text);
     
     self.phoneLabel.text = self.venue.phoneNumber;
@@ -93,6 +92,7 @@
     //        self.phoneLabel.text = @"No Phone Number Listed";
     //    }
     self.reviewLabel.text = self.venue.excerpt;
+    NSLog(@"%f %f", self.phoneLabel.bounds.origin.x, self.phoneLabel.bounds.origin.y);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,7 +104,7 @@
         // try to fit all the text in there (sizeToFit). This resizes both the
         // label's width and height.
         
-        CGRect rect = CGRectMake(100, 10, 205, 10000);
+        CGRect rect = CGRectMake(20, 5, 280, 10000);
         self.addressLabel.frame = rect;
         [self.addressLabel sizeToFit];
         
@@ -112,10 +112,27 @@
         // afterwards to the proper dimensions.
         rect.size.height = self.addressLabel.frame.size.height;
         self.addressLabel.frame = rect;
-        return self.addressLabel.frame.size.height + 20;
+        return self.addressLabel.frame.size.height + 10;
+    } else if (indexPath.section == 2 && indexPath.row == 0) {
+        
+        // UILabels can display their content in multiple rows but this takes
+        // some trickery. We first say to the label: this is your width, now
+        // try to fit all the text in there (sizeToFit). This resizes both the
+        // label's width and height.
+        
+        CGRect rect = CGRectMake(20, 5, 280, 10000);
+        self.reviewLabel.frame = rect;
+        [self.reviewLabel sizeToFit];
+        
+        // We want the width to remain at 205 points, so we resize the label
+        // afterwards to the proper dimensions.
+        rect.size.height = self.reviewLabel.frame.size.height;
+        self.reviewLabel.frame = rect;
+        return self.reviewLabel.frame.size.height + 10;
     } else {
         return 44;
     }
+    
 }
 
 - (void)didReceiveMemoryWarning
