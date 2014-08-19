@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/ZZAFindr.app</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.sdoowhsoj.ZZAFindr</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0</string>
+		<key>CFBundleVersion</key>
+		<string>1.0</string>
+		<key>IconPaths</key>
+		<array>
+			<string>Applications/ZZAFindr.app/AppIcon29x29@2x.png</string>
+			<string>Applications/ZZAFindr.app/AppIcon29x29.png</string>
+			<string>Applications/ZZAFindr.app/AppIcon40x40@2x.png</string>
+			<string>Applications/ZZAFindr.app/AppIcon57x57@2x.png</string>
+			<string>Applications/ZZAFindr.app/AppIcon57x57.png</string>
+			<string>Applications/ZZAFindr.app/AppIcon60x60@2x.png</string>
+		</array>
+		<key>SigningIdentity</key>
+		<string>iPhone Developer: Josh Woods (JY35B26V3J)</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2014-04-30T00:02:44Z</date>
+	<key>Name</key>
+	<string>ZZAFindr</string>
+	<key>SchemeName</key>
+	<string>ZZAFindr</string>
+	<key>Status</key>
+	<string>Passed Validation</string>
+</dict>
+</plist>

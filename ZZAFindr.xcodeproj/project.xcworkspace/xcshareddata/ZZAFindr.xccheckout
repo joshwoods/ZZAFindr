@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2CCAE329-18DF-4832-8F07-C8663A5FB29C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ZZAFindr</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6208CE37-125E-490D-B018-161CB8146195</key>
+		<string>https://bitbucket.org/aporcelaintouch/ccalc-final.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ZZAFindr/ZZAFindr/ZZAFindr.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6208CE37-125E-490D-B018-161CB8146195</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/aporcelaintouch/ccalc-final.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6208CE37-125E-490D-B018-161CB8146195</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6208CE37-125E-490D-B018-161CB8146195</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ZZAFindr</string>
+		</dict>
+	</array>
+</dict>
+</plist>

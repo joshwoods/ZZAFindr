@@ -1,0 +1,529 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F77BC3B6190D8A21008F5167 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */; };
+		F77F8EAA192046E700767290 /* ZZACategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F77F8EA9192046E700767290 /* ZZACategory.m */; };
+		F7E0919E190D8020005A967A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0919D190D8020005A967A /* Foundation.framework */; };
+		F7E091A0190D8020005A967A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0919F190D8020005A967A /* CoreGraphics.framework */; };
+		F7E091A2190D8020005A967A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E091A1190D8020005A967A /* UIKit.framework */; };
+		F7E091A8190D8020005A967A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7E091A6190D8020005A967A /* InfoPlist.strings */; };
+		F7E091AA190D8020005A967A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091A9190D8020005A967A /* main.m */; };
+		F7E091AE190D8020005A967A /* ZZAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091AD190D8020005A967A /* ZZAAppDelegate.m */; };
+		F7E091B1190D8020005A967A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7E091AF190D8020005A967A /* Main.storyboard */; };
+		F7E091B6190D8020005A967A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7E091B5190D8020005A967A /* Images.xcassets */; };
+		F7E091BD190D8020005A967A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E091BC190D8020005A967A /* XCTest.framework */; };
+		F7E091BE190D8020005A967A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0919D190D8020005A967A /* Foundation.framework */; };
+		F7E091BF190D8020005A967A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E091A1190D8020005A967A /* UIKit.framework */; };
+		F7E091C7190D8020005A967A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7E091C5190D8020005A967A /* InfoPlist.strings */; };
+		F7E091C9190D8020005A967A /* ZZAFindrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091C8190D8020005A967A /* ZZAFindrTests.m */; };
+		F7E091D7190D80C9005A967A /* ZZAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091D6190D80C9005A967A /* ZZAMainViewController.m */; };
+		F7E091DD190D8122005A967A /* ZZATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091DC190D8122005A967A /* ZZATableViewController.m */; };
+		F7E091E0190D8156005A967A /* ZZAAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091DF190D8156005A967A /* ZZAAboutViewController.m */; };
+		F7E091E3190D8196005A967A /* ZZAVenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091E2190D8196005A967A /* ZZAVenueDetailViewController.m */; };
+		F7E091E6190D81C8005A967A /* ZZAVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091E5190D81C8005A967A /* ZZAVenue.m */; };
+		F7E091E9190D81F5005A967A /* ZZALocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091E8190D81F5005A967A /* ZZALocation.m */; };
+		F7EF95A919205F6F00ACFDD7 /* ZZAReview.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EF95A819205F6F00ACFDD7 /* ZZAReview.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F7E091C0190D8020005A967A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E09192190D8020005A967A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F7E09199190D8020005A967A;
+			remoteInfo = ZZAFindr;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F77F8EA8192046E700767290 /* ZZACategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZACategory.h; sourceTree = "<group>"; };
+		F77F8EA9192046E700767290 /* ZZACategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZACategory.m; sourceTree = "<group>"; };
+		F7E0919A190D8020005A967A /* ZZAFindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZZAFindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E0919D190D8020005A967A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F7E0919F190D8020005A967A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F7E091A1190D8020005A967A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F7E091A5190D8020005A967A /* ZZAFindr-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ZZAFindr-Info.plist"; sourceTree = "<group>"; };
+		F7E091A7190D8020005A967A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F7E091A9190D8020005A967A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F7E091AB190D8020005A967A /* ZZAFindr-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZZAFindr-Prefix.pch"; sourceTree = "<group>"; };
+		F7E091AC190D8020005A967A /* ZZAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZAAppDelegate.h; sourceTree = "<group>"; };
+		F7E091AD190D8020005A967A /* ZZAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZAAppDelegate.m; sourceTree = "<group>"; };
+		F7E091B0190D8020005A967A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F7E091B5190D8020005A967A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F7E091BB190D8020005A967A /* ZZAFindrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZZAFindrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E091BC190D8020005A967A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F7E091C4190D8020005A967A /* ZZAFindrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ZZAFindrTests-Info.plist"; sourceTree = "<group>"; };
+		F7E091C6190D8020005A967A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F7E091C8190D8020005A967A /* ZZAFindrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZAFindrTests.m; sourceTree = "<group>"; };
+		F7E091D5190D80C9005A967A /* ZZAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAMainViewController.h; sourceTree = "<group>"; };
+		F7E091D6190D80C9005A967A /* ZZAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAMainViewController.m; sourceTree = "<group>"; };
+		F7E091DB190D8122005A967A /* ZZATableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZATableViewController.h; sourceTree = "<group>"; };
+		F7E091DC190D8122005A967A /* ZZATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZATableViewController.m; sourceTree = "<group>"; };
+		F7E091DE190D8156005A967A /* ZZAAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAAboutViewController.h; sourceTree = "<group>"; };
+		F7E091DF190D8156005A967A /* ZZAAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAAboutViewController.m; sourceTree = "<group>"; };
+		F7E091E1190D8196005A967A /* ZZAVenueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAVenueDetailViewController.h; sourceTree = "<group>"; };
+		F7E091E2190D8196005A967A /* ZZAVenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAVenueDetailViewController.m; sourceTree = "<group>"; };
+		F7E091E4190D81C8005A967A /* ZZAVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAVenue.h; sourceTree = "<group>"; };
+		F7E091E5190D81C8005A967A /* ZZAVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAVenue.m; sourceTree = "<group>"; };
+		F7E091E7190D81F5005A967A /* ZZALocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZALocation.h; sourceTree = "<group>"; };
+		F7E091E8190D81F5005A967A /* ZZALocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZALocation.m; sourceTree = "<group>"; };
+		F7EF95A719205F6F00ACFDD7 /* ZZAReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAReview.h; sourceTree = "<group>"; };
+		F7EF95A819205F6F00ACFDD7 /* ZZAReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAReview.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F7E09197190D8020005A967A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7E091A0190D8020005A967A /* CoreGraphics.framework in Frameworks */,
+				F7E091A2190D8020005A967A /* UIKit.framework in Frameworks */,
+				F7E0919E190D8020005A967A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7E091B8190D8020005A967A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7E091BD190D8020005A967A /* XCTest.framework in Frameworks */,
+				F7E091BF190D8020005A967A /* UIKit.framework in Frameworks */,
+				F7E091BE190D8020005A967A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F7E09191190D8020005A967A = {
+			isa = PBXGroup;
+			children = (
+				F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */,
+				F7E091A3190D8020005A967A /* ZZAFindr */,
+				F7E091C2190D8020005A967A /* ZZAFindrTests */,
+				F7E0919C190D8020005A967A /* Frameworks */,
+				F7E0919B190D8020005A967A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F7E0919B190D8020005A967A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7E0919A190D8020005A967A /* ZZAFindr.app */,
+				F7E091BB190D8020005A967A /* ZZAFindrTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F7E0919C190D8020005A967A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7E0919D190D8020005A967A /* Foundation.framework */,
+				F7E0919F190D8020005A967A /* CoreGraphics.framework */,
+				F7E091A1190D8020005A967A /* UIKit.framework */,
+				F7E091BC190D8020005A967A /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F7E091A3190D8020005A967A /* ZZAFindr */ = {
+			isa = PBXGroup;
+			children = (
+				F7E091AC190D8020005A967A /* ZZAAppDelegate.h */,
+				F7E091AD190D8020005A967A /* ZZAAppDelegate.m */,
+				F7E091AF190D8020005A967A /* Main.storyboard */,
+				F7E091B5190D8020005A967A /* Images.xcassets */,
+				F7E091D5190D80C9005A967A /* ZZAMainViewController.h */,
+				F7E091D6190D80C9005A967A /* ZZAMainViewController.m */,
+				F7E091DB190D8122005A967A /* ZZATableViewController.h */,
+				F7E091DC190D8122005A967A /* ZZATableViewController.m */,
+				F7E091DE190D8156005A967A /* ZZAAboutViewController.h */,
+				F7E091DF190D8156005A967A /* ZZAAboutViewController.m */,
+				F7E091E1190D8196005A967A /* ZZAVenueDetailViewController.h */,
+				F7E091E2190D8196005A967A /* ZZAVenueDetailViewController.m */,
+				F7E091E4190D81C8005A967A /* ZZAVenue.h */,
+				F7E091E5190D81C8005A967A /* ZZAVenue.m */,
+				F7E091E7190D81F5005A967A /* ZZALocation.h */,
+				F7E091E8190D81F5005A967A /* ZZALocation.m */,
+				F77F8EA8192046E700767290 /* ZZACategory.h */,
+				F77F8EA9192046E700767290 /* ZZACategory.m */,
+				F7EF95A719205F6F00ACFDD7 /* ZZAReview.h */,
+				F7EF95A819205F6F00ACFDD7 /* ZZAReview.m */,
+				F7E091A4190D8020005A967A /* Supporting Files */,
+			);
+			path = ZZAFindr;
+			sourceTree = "<group>";
+		};
+		F7E091A4190D8020005A967A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F7E091A5190D8020005A967A /* ZZAFindr-Info.plist */,
+				F7E091A6190D8020005A967A /* InfoPlist.strings */,
+				F7E091A9190D8020005A967A /* main.m */,
+				F7E091AB190D8020005A967A /* ZZAFindr-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F7E091C2190D8020005A967A /* ZZAFindrTests */ = {
+			isa = PBXGroup;
+			children = (
+				F7E091C8190D8020005A967A /* ZZAFindrTests.m */,
+				F7E091C3190D8020005A967A /* Supporting Files */,
+			);
+			path = ZZAFindrTests;
+			sourceTree = "<group>";
+		};
+		F7E091C3190D8020005A967A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F7E091C4190D8020005A967A /* ZZAFindrTests-Info.plist */,
+				F7E091C5190D8020005A967A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F7E09199190D8020005A967A /* ZZAFindr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7E091CC190D8020005A967A /* Build configuration list for PBXNativeTarget "ZZAFindr" */;
+			buildPhases = (
+				F7E09196190D8020005A967A /* Sources */,
+				F7E09197190D8020005A967A /* Frameworks */,
+				F7E09198190D8020005A967A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZZAFindr;
+			productName = ZZAFindr;
+			productReference = F7E0919A190D8020005A967A /* ZZAFindr.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F7E091BA190D8020005A967A /* ZZAFindrTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7E091CF190D8020005A967A /* Build configuration list for PBXNativeTarget "ZZAFindrTests" */;
+			buildPhases = (
+				F7E091B7190D8020005A967A /* Sources */,
+				F7E091B8190D8020005A967A /* Frameworks */,
+				F7E091B9190D8020005A967A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7E091C1190D8020005A967A /* PBXTargetDependency */,
+			);
+			name = ZZAFindrTests;
+			productName = ZZAFindrTests;
+			productReference = F7E091BB190D8020005A967A /* ZZAFindrTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F7E09192190D8020005A967A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ZZA;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = sdoowhsoj;
+				TargetAttributes = {
+					F7E09199190D8020005A967A = {
+						DevelopmentTeam = LY9WTRZMPA;
+					};
+					F7E091BA190D8020005A967A = {
+						TestTargetID = F7E09199190D8020005A967A;
+					};
+				};
+			};
+			buildConfigurationList = F7E09195190D8020005A967A /* Build configuration list for PBXProject "ZZAFindr" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F7E09191190D8020005A967A;
+			productRefGroup = F7E0919B190D8020005A967A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F7E09199190D8020005A967A /* ZZAFindr */,
+				F7E091BA190D8020005A967A /* ZZAFindrTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F7E09198190D8020005A967A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7E091B6190D8020005A967A /* Images.xcassets in Resources */,
+				F77BC3B6190D8A21008F5167 /* Default-568h@2x.png in Resources */,
+				F7E091A8190D8020005A967A /* InfoPlist.strings in Resources */,
+				F7E091B1190D8020005A967A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7E091B9190D8020005A967A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7E091C7190D8020005A967A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F7E09196190D8020005A967A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7E091E3190D8196005A967A /* ZZAVenueDetailViewController.m in Sources */,
+				F7E091E6190D81C8005A967A /* ZZAVenue.m in Sources */,
+				F7E091E0190D8156005A967A /* ZZAAboutViewController.m in Sources */,
+				F7EF95A919205F6F00ACFDD7 /* ZZAReview.m in Sources */,
+				F7E091D7190D80C9005A967A /* ZZAMainViewController.m in Sources */,
+				F7E091AE190D8020005A967A /* ZZAAppDelegate.m in Sources */,
+				F7E091DD190D8122005A967A /* ZZATableViewController.m in Sources */,
+				F7E091AA190D8020005A967A /* main.m in Sources */,
+				F7E091E9190D81F5005A967A /* ZZALocation.m in Sources */,
+				F77F8EAA192046E700767290 /* ZZACategory.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7E091B7190D8020005A967A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7E091C9190D8020005A967A /* ZZAFindrTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F7E091C1190D8020005A967A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F7E09199190D8020005A967A /* ZZAFindr */;
+			targetProxy = F7E091C0190D8020005A967A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F7E091A6190D8020005A967A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7E091A7190D8020005A967A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F7E091AF190D8020005A967A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7E091B0190D8020005A967A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F7E091C5190D8020005A967A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7E091C6190D8020005A967A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F7E091CA190D8020005A967A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F7E091CB190D8020005A967A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F7E091CD190D8020005A967A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ZZAFindr/ZZAFindr-Prefix.pch";
+				INFOPLIST_FILE = "ZZAFindr/ZZAFindr-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F7E091CE190D8020005A967A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ZZAFindr/ZZAFindr-Prefix.pch";
+				INFOPLIST_FILE = "ZZAFindr/ZZAFindr-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F7E091D0190D8020005A967A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ZZAFindr.app/ZZAFindr";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ZZAFindr/ZZAFindr-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ZZAFindrTests/ZZAFindrTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F7E091D1190D8020005A967A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ZZAFindr.app/ZZAFindr";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ZZAFindr/ZZAFindr-Prefix.pch";
+				INFOPLIST_FILE = "ZZAFindrTests/ZZAFindrTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F7E09195190D8020005A967A /* Build configuration list for PBXProject "ZZAFindr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7E091CA190D8020005A967A /* Debug */,
+				F7E091CB190D8020005A967A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7E091CC190D8020005A967A /* Build configuration list for PBXNativeTarget "ZZAFindr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7E091CD190D8020005A967A /* Debug */,
+				F7E091CE190D8020005A967A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7E091CF190D8020005A967A /* Build configuration list for PBXNativeTarget "ZZAFindrTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7E091D0190D8020005A967A /* Debug */,
+				F7E091D1190D8020005A967A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F7E09192190D8020005A967A /* Project object */;
+}
