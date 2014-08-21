@@ -10,17 +10,9 @@
 #import "ZZAVenue.h"
 @import MapKit;
 
-@interface ZZAVenueDetailViewController : UITableViewController <MKMapViewDelegate>
+@interface ZZAVenueDetailViewController : UITableViewController
 
 @property (nonatomic, weak) ZZAVenue *venue;
-@property (nonatomic, strong) CLGeocoder *geocoder;
-@property (nonatomic, weak) IBOutlet UILabel *phoneLabel;
-@property (nonatomic, weak) IBOutlet UILabel *addressLabel;
-@property (nonatomic, weak) IBOutlet UILabel *reviewLabel;
-
-
-
-- (IBAction)phoneCall:(id)sender;
 
 +(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress;
 -(NSData*)toJSON;

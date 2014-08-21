@@ -13,7 +13,6 @@
 @interface ZZAMainViewController : UIViewController <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *nearbyVenues;
-@property (nonatomic, strong) NSMutableArray *allVenues;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

@@ -26,7 +26,7 @@
         self.zip = dict[@"zip"];
         self.phoneNumber = dict[@"phone"];
         self.distance= dict[@"distance"];
-        self.url = dict[@"url"];
+        self.yelpURL = dict[@"url"];
         self.avgRating = dict[@"avg_rating"];
         self.reviewCount = dict[@"review_count"];
         NSArray *categoryArray = dict[@"categories"];
@@ -40,7 +40,7 @@
         {
             ZZAReview *rev = [[ZZAReview alloc]initWithDictionary:dict];
             self.excerpt = rev.textExcerpt;
-            self.reviewUrl = rev.url;
+            self.reviewUrl = rev.reviewURL;
         }
     }
     return self;

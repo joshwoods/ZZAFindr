@@ -22,9 +22,7 @@
 
 - (IBAction)resetLocation:(id)sender
 {
-    [self.allVenues removeAllObjects];
     [self.nearbyVenues removeAllObjects];
-    NSLog(@"%lu", (unsigned long)self.allVenues.count);
     [self setLabelsToBlank];
     [self.locationManager startUpdatingLocation];
 }
@@ -76,7 +74,6 @@
 
 -(void)verbiageLogic
 {
-    //verbiage logic
     if(self.nearbyVenues.count == 2){
         ZZAVenue *closest = self.nearbyVenues[0];
         self.venuesInformationLabel.text = [NSString stringWithFormat:@"%@", closest.name];
@@ -98,8 +95,6 @@
         self.moreResultsLabel.text = @"Click refresh or More to try again!";
         self.moreResultsButton.hidden = YES;
     }
-    
-    NSLog(@"%lu", (unsigned long)self.nearbyVenues.count);
 }
 
 -(void)theAnimation
@@ -130,7 +125,6 @@
     NSLog(@"MAIN VIEW STARTED");
     self.nearbyVenues = [[NSMutableArray alloc] init];
     self.locationManager = [[CLLocationManager alloc] init];
-    self.allVenues = [[NSMutableArray alloc] init];
     [self setLabelsToBlank];
     self.feedMeLabel.text = @"Click the Pizza above to search!";
     [self theAnimation];

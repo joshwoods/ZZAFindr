@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="6MW-4a-Gex">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="6MW-4a-Gex">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -16,14 +16,14 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rNH-3Q-UT7">
                                 <rect key="frame" x="20" y="68" width="280" height="354"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <string key="text">Thank for downloading this app.
+                                <string key="text">Thank you for downloading this app!
 
 Not only do I hope that it helps you find the pizza you are looking for, but I hope that it helps you open your eyes to more places around you that you can go eat and discover and meet new people.
 
 If you have any issues, PLEASE, feel free to reach out to me! You can find me on twitter @sdoowhsoj and I will look into any bugs or issues that (hopefully do not) crop up.
 
 Once again, thank you and enjoy!</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -56,7 +56,7 @@ Once again, thank you and enjoy!</string>
             </objects>
             <point key="canvasLocation" x="1600" y="-760"/>
         </scene>
-        <!--Main View Controller - Are you hungry?-->
+        <!--Main View Controller - Home-->
         <scene sceneID="aSL-Dc-fNG">
             <objects>
                 <viewController storyboardIdentifier="mainViewController" id="DbC-we-ZVX" customClass="ZZAMainViewController" sceneMemberID="viewController">
@@ -121,7 +121,7 @@ Once again, thank you and enjoy!</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Are you hungry?" id="Dk5-Xn-hTS">
+                    <navigationItem key="navigationItem" title="Home" id="Dk5-Xn-hTS">
                         <barButtonItem key="leftBarButtonItem" id="SzJ-8x-HgN">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="SMp-S6-Fzb">
                                 <rect key="frame" x="16" y="11" width="22" height="22"/>
@@ -156,7 +156,7 @@ Once again, thank you and enjoy!</string>
             </objects>
             <point key="canvasLocation" x="1165" y="-47"/>
         </scene>
-        <!--Table View Controller - Nearby Places-->
+        <!--Table View Controller - Nearby-->
         <scene sceneID="uDd-Pi-dwo">
             <objects>
                 <tableViewController storyboardIdentifier="tableViewController" clearsSelectionOnViewWillAppear="NO" id="mNX-1e-9bs" customClass="ZZATableViewController" sceneMemberID="viewController">
@@ -209,7 +209,7 @@ Once again, thank you and enjoy!</string>
                             <outlet property="delegate" destination="mNX-1e-9bs" id="z0A-DI-acj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Nearby Places" id="oiI-l1-Ih9">
+                    <navigationItem key="navigationItem" title="Nearby" id="oiI-l1-Ih9">
                         <barButtonItem key="backBarButtonItem" title="Back" id="ex2-fN-RLi"/>
                     </navigationItem>
                     <connections>
@@ -220,20 +220,42 @@ Once again, thank you and enjoy!</string>
             </objects>
             <point key="canvasLocation" x="1600" y="-47"/>
         </scene>
-        <!--Venue Detail View Controller-->
+        <!--Venue Detail View Controller - Details-->
         <scene sceneID="oRS-T0-MWv">
             <objects>
                 <tableViewController id="uLS-ea-eHS" customClass="ZZAVenueDetailViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Pi5-Hn-efA">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Pi5-Hn-efA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
+                            <tableViewSection headerTitle="Name" id="2iL-az-6ib">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EbV-af-4iJ">
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="EbV-af-4iJ" id="Use-ta-LaH">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yxo-ps-qVd">
+                                                    <rect key="frame" x="20" y="3" width="280" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                                    <color key="textColor" red="0.74901960779999999" green="0.22352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <size key="shadowOffset" width="1" height="1"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Phone Number" id="iKD-LD-ve5">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hur-TU-hbH">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hur-TU-hbH" id="OEG-z3-ceb">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -242,7 +264,7 @@ Once again, thank you and enjoy!</string>
                                                 <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999-999-9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="In1-CM-UTC">
                                                     <rect key="frame" x="20" y="3" width="247" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.22352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="1" height="1"/>
@@ -255,7 +277,7 @@ Once again, thank you and enjoy!</string>
                             <tableViewSection headerTitle="Address" id="r2h-hv-61r">
                                 <cells>
                                     <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PRF-pP-spe">
-                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="303" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PRF-pP-spe" id="868-6S-WYQ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -264,7 +286,7 @@ Once again, thank you and enjoy!</string>
                                                 <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JXp-y2-5mE">
                                                     <rect key="frame" x="20" y="3" width="280" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.22352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="1" height="1"/>
@@ -277,16 +299,16 @@ Once again, thank you and enjoy!</string>
                             <tableViewSection headerTitle="Review" id="JBt-Ml-6nC">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FBw-zI-opf">
-                                        <rect key="frame" x="0.0" y="303" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="395" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FBw-zI-opf" id="Hv8-ry-8cM">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AWd-ZY-Ci0">
-                                                    <rect key="frame" x="20" y="3" width="247" height="37"/>
+                                                    <rect key="frame" x="20" y="3" width="280" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.22352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="1" height="1"/>
@@ -296,19 +318,19 @@ Once again, thank you and enjoy!</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="View on Yelp" id="O3U-v9-bNB">
+                            <tableViewSection headerTitle="View on Yelp" id="erF-eN-gpQ">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YOW-pL-fV6">
-                                        <rect key="frame" x="0.0" y="395" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qyd-T5-KyD">
+                                        <rect key="frame" x="0.0" y="487" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YOW-pL-fV6" id="wfq-b9-ufG">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qyd-T5-KyD" id="LN9-ef-ReK">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click for more info!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PHe-cY-sxJ">
-                                                    <rect key="frame" x="20" y="3" width="247" height="37"/>
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click for more info!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TQV-Pc-0RB">
+                                                    <rect key="frame" x="20" y="3" width="280" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.22352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="1" height="1"/>
@@ -324,16 +346,60 @@ Once again, thank you and enjoy!</string>
                             <outlet property="delegate" destination="uLS-ea-eHS" id="MmK-C9-yGc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="rwv-qc-dwQ"/>
+                    <navigationItem key="navigationItem" title="Details" id="rwv-qc-dwQ"/>
                     <connections>
                         <outlet property="addressLabel" destination="JXp-y2-5mE" id="aeZ-S7-H5U"/>
+                        <outlet property="nameLabel" destination="Yxo-ps-qVd" id="JMl-9o-uaY"/>
                         <outlet property="phoneLabel" destination="In1-CM-UTC" id="3Ko-kn-asz"/>
                         <outlet property="reviewLabel" destination="AWd-ZY-Ci0" id="T1Z-3h-deC"/>
+                        <segue destination="BxP-EO-Cag" kind="modal" identifier="showMapView" id="cXp-UU-RcR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMp-7R-k61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1990" y="-47"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="KBW-wq-ERO">
+            <objects>
+                <viewController id="BxP-EO-Cag" customClass="ZZAMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fZc-Qd-FxS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="CBm-3r-2ZZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BxP-EO-Cag" id="iZ2-fr-QPZ"/>
+                                </connections>
+                            </mapView>
+                            <navigationBar appearanceType="aqua" contentMode="scaleToFill" id="uIm-AF-8JA">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Map" id="a7I-dr-vcv">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="8pv-Zn-GmC">
+                                            <connections>
+                                                <action selector="closeScreen:" destination="BxP-EO-Cag" id="XRN-66-saG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BxP-EO-Cag" id="Cnn-rk-Kdu"/>
+                                </connections>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="CBm-3r-2ZZ" id="Pxj-fP-3YN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vyb-OH-pzb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2399" y="-39"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6X9-oy-eVk">

@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSString *zip;
 @property (nonatomic, strong) NSString *phoneNumber;
 @property (nonatomic, strong) NSString *distance;
-@property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *yelpURL;
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *excerpt;
 @property (nonatomic, strong) NSString *reviewUrl;

@@ -16,7 +16,7 @@
     if (self)
     {
         self.textExcerpt = dict[@"text_excerpt"];
-        self.url = dict[@"url"];
+        self.reviewURL = dict[@"url"];
     }
     return self;
 }

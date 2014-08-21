@@ -11,7 +11,7 @@
 @interface ZZAReview : NSObject
 
 @property (nonatomic, strong) NSString *textExcerpt;
-@property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *reviewURL;
 
 -(id)initWithDictionary:(NSDictionary *)dict;
 

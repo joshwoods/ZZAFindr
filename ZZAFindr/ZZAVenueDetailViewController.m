@@ -11,29 +11,16 @@
 
 @interface ZZAVenueDetailViewController ()
 
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *phoneLabel;
+@property (nonatomic, weak) IBOutlet UILabel *addressLabel;
+@property (nonatomic, weak) IBOutlet UILabel *reviewLabel;
+
 @end
 
 @implementation ZZAVenueDetailViewController
 {
-    MKMapView *mapView;
-    NSString *phoneNumber;
-    double coordinates;
-}
-
-- (IBAction)phoneCall:(id)sender
-{
-    NSString *phoneString = [NSString stringWithFormat:@"tel://%@", phoneNumber];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
-}
-
-- (IBAction)website:(id)sender
-{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.url]];
-}
-
-- (IBAction)review:(id)sender
-{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.reviewUrl]];
+    NSString *_phoneNumber;
 }
 
 +(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress
@@ -63,7 +50,6 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor colorWithRed:0.945 green:0.851 blue:0.6 alpha:1], NSForegroundColorAttributeName,
                                                                      [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
-    self.navigationItem.title = self.venue.name;
 }
 
 - (void)viewDidLoad
@@ -72,67 +58,77 @@
     
     //address formatting button logic
     if(self.venue.address3 != nil){
-        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@ %@, %@", self.venue.address1,self.venue.address2,self.venue.address3, self.venue.city, self.venue.state];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@ %@ %@, %@", self.venue.address1,self.venue.address2,self.venue.address3, self.venue.city, self.venue.state];
     } else if(self.venue.address2 != nil){
-        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@, %@", self.venue.address1,self.venue.address2, self.venue.city, self.venue.state];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@ %@, %@", self.venue.address1,self.venue.address2, self.venue.city, self.venue.state];
     } else {
-        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@, %@", self.venue.address1, self.venue.city, self.venue.state];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@ %@, %@", self.venue.address1, self.venue.city, self.venue.state];
     }
-    NSLog(@"%@", self.addressLabel.text);
     
+    self.nameLabel.text = self.venue.name;
     self.phoneLabel.text = self.venue.phoneNumber;
-    //    //phone number enabled logic
-    //    if(self.venue.phoneNumber != nil)
-    //    {
-    //        self.phoneCallButton.enabled = YES;
-    //        self.phoneLabel.text = self.venue.phoneNumber;
-    //        phoneNumber = self.venue.phoneNumber;
-    //    } else {
-    //        self.phoneCallButton.enabled = NO;
-    //        self.phoneLabel.text = @"No Phone Number Listed";
-    //    }
     self.reviewLabel.text = self.venue.excerpt;
-    NSLog(@"%f %f", self.phoneLabel.bounds.origin.x, self.phoneLabel.bounds.origin.y);
+    if(self.venue.phoneNumber != nil){
+        self.phoneLabel.text = self.venue.phoneNumber;
+        _phoneNumber = self.venue.phoneNumber;
+    } else {
+        self.phoneLabel.text = @"No Phone Number Listed";
+    }
+}
+
+#pragma mark TableView Info
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 1 && indexPath.row == 0){
+        NSString *phoneString = [NSString stringWithFormat:@"tel://%@", _phoneNumber];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+    } else if (indexPath.section == 2 && indexPath.row == 0){
+        [self performSegueWithIdentifier:@"showMapView" sender:self];
+    } else if (indexPath.section == 3 && indexPath.row == 0){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.reviewUrl]];
+    } else if (indexPath.section == 4 && indexPath.row == 0){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.yelpURL]];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1 && indexPath.row == 0) {
-        
+    if (indexPath.section == 0) {
         // UILabels can display their content in multiple rows but this takes
         // some trickery. We first say to the label: this is your width, now
         // try to fit all the text in there (sizeToFit). This resizes both the
         // label's width and height.
-        
         CGRect rect = CGRectMake(20, 5, 280, 10000);
-        self.addressLabel.frame = rect;
-        [self.addressLabel sizeToFit];
-        
+        self.nameLabel.frame = rect;
+        [self.nameLabel sizeToFit];
         // We want the width to remain at 205 points, so we resize the label
         // afterwards to the proper dimensions.
         rect.size.height = self.addressLabel.frame.size.height;
+        self.nameLabel.frame = rect;
+        return self.nameLabel.frame.size.height + 10;
+    } else if (indexPath.section == 2) {
+        CGRect rect = CGRectMake(20, 5, 280, 10000);
+        self.addressLabel.frame = rect;
+        [self.addressLabel sizeToFit];
+        rect.size.height = self.addressLabel.frame.size.height;
         self.addressLabel.frame = rect;
         return self.addressLabel.frame.size.height + 10;
-    } else if (indexPath.section == 2 && indexPath.row == 0) {
-        
-        // UILabels can display their content in multiple rows but this takes
-        // some trickery. We first say to the label: this is your width, now
-        // try to fit all the text in there (sizeToFit). This resizes both the
-        // label's width and height.
-        
+    } else if (indexPath.section == 3) {
         CGRect rect = CGRectMake(20, 5, 280, 10000);
         self.reviewLabel.frame = rect;
         [self.reviewLabel sizeToFit];
-        
-        // We want the width to remain at 205 points, so we resize the label
-        // afterwards to the proper dimensions.
         rect.size.height = self.reviewLabel.frame.size.height;
         self.reviewLabel.frame = rect;
         return self.reviewLabel.frame.size.height + 10;
     } else {
         return 44;
     }
-    
+}
+
+-(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 1;
 }
 
 - (void)didReceiveMemoryWarning

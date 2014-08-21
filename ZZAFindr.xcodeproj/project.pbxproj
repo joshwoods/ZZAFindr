@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F75EE9EC19A5914100F943DC /* ZZAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */; };
+		F75EE9EE19A5919B00F943DC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75EE9ED19A5919A00F943DC /* MapKit.framework */; };
 		F77BC3B6190D8A21008F5167 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */; };
 		F77F8EAA192046E700767290 /* ZZACategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F77F8EA9192046E700767290 /* ZZACategory.m */; };
 		F7E0919E190D8020005A967A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0919D190D8020005A967A /* Foundation.framework */; };
@@ -27,7 +29,6 @@
 		F7E091E0190D8156005A967A /* ZZAAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091DF190D8156005A967A /* ZZAAboutViewController.m */; };
 		F7E091E3190D8196005A967A /* ZZAVenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091E2190D8196005A967A /* ZZAVenueDetailViewController.m */; };
 		F7E091E6190D81C8005A967A /* ZZAVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091E5190D81C8005A967A /* ZZAVenue.m */; };
-		F7E091E9190D81F5005A967A /* ZZALocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091E8190D81F5005A967A /* ZZALocation.m */; };
 		F7EF95A919205F6F00ACFDD7 /* ZZAReview.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EF95A819205F6F00ACFDD7 /* ZZAReview.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F75EE9EA19A5914100F943DC /* ZZAMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAMapViewController.h; sourceTree = "<group>"; };
+		F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAMapViewController.m; sourceTree = "<group>"; };
+		F75EE9ED19A5919A00F943DC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F77F8EA8192046E700767290 /* ZZACategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZACategory.h; sourceTree = "<group>"; };
 		F77F8EA9192046E700767290 /* ZZACategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZACategory.m; sourceTree = "<group>"; };
@@ -72,8 +76,6 @@
 		F7E091E2190D8196005A967A /* ZZAVenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAVenueDetailViewController.m; sourceTree = "<group>"; };
 		F7E091E4190D81C8005A967A /* ZZAVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAVenue.h; sourceTree = "<group>"; };
 		F7E091E5190D81C8005A967A /* ZZAVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAVenue.m; sourceTree = "<group>"; };
-		F7E091E7190D81F5005A967A /* ZZALocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZALocation.h; sourceTree = "<group>"; };
-		F7E091E8190D81F5005A967A /* ZZALocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZALocation.m; sourceTree = "<group>"; };
 		F7EF95A719205F6F00ACFDD7 /* ZZAReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAReview.h; sourceTree = "<group>"; };
 		F7EF95A819205F6F00ACFDD7 /* ZZAReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAReview.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F75EE9EE19A5919B00F943DC /* MapKit.framework in Frameworks */,
 				F7E091A0190D8020005A967A /* CoreGraphics.framework in Frameworks */,
 				F7E091A2190D8020005A967A /* UIKit.framework in Frameworks */,
 				F7E0919E190D8020005A967A /* Foundation.framework in Frameworks */,
@@ -125,6 +128,7 @@
 		F7E0919C190D8020005A967A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F75EE9ED19A5919A00F943DC /* MapKit.framework */,
 				F7E0919D190D8020005A967A /* Foundation.framework */,
 				F7E0919F190D8020005A967A /* CoreGraphics.framework */,
 				F7E091A1190D8020005A967A /* UIKit.framework */,
@@ -150,13 +154,13 @@
 				F7E091E2190D8196005A967A /* ZZAVenueDetailViewController.m */,
 				F7E091E4190D81C8005A967A /* ZZAVenue.h */,
 				F7E091E5190D81C8005A967A /* ZZAVenue.m */,
-				F7E091E7190D81F5005A967A /* ZZALocation.h */,
-				F7E091E8190D81F5005A967A /* ZZALocation.m */,
 				F77F8EA8192046E700767290 /* ZZACategory.h */,
 				F77F8EA9192046E700767290 /* ZZACategory.m */,
 				F7EF95A719205F6F00ACFDD7 /* ZZAReview.h */,
 				F7EF95A819205F6F00ACFDD7 /* ZZAReview.m */,
 				F7E091A4190D8020005A967A /* Supporting Files */,
+				F75EE9EA19A5914100F943DC /* ZZAMapViewController.h */,
+				F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */,
 			);
 			path = ZZAFindr;
 			sourceTree = "<group>";
@@ -293,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7E091E3190D8196005A967A /* ZZAVenueDetailViewController.m in Sources */,
+				F75EE9EC19A5914100F943DC /* ZZAMapViewController.m in Sources */,
 				F7E091E6190D81C8005A967A /* ZZAVenue.m in Sources */,
 				F7E091E0190D8156005A967A /* ZZAAboutViewController.m in Sources */,
 				F7EF95A919205F6F00ACFDD7 /* ZZAReview.m in Sources */,
@@ -300,7 +305,6 @@
 				F7E091AE190D8020005A967A /* ZZAAppDelegate.m in Sources */,
 				F7E091DD190D8122005A967A /* ZZATableViewController.m in Sources */,
 				F7E091AA190D8020005A967A /* main.m in Sources */,
-				F7E091E9190D81F5005A967A /* ZZALocation.m in Sources */,
 				F77F8EAA192046E700767290 /* ZZACategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
