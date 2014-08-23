@@ -11,19 +11,30 @@
 #import "ZZAVenue.h"
 #define ywsid @"uhdAgMc2ViejHvGQixqfuQ"
 #import "ZZATableViewController.h"
+#define UIColorFromRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
+@interface ZZAMainViewController () <UICollisionBehaviorDelegate>
+
+@end
 
 @implementation ZZAMainViewController
 {
     NSString *userLatitude;
     NSString *userLongitude;
     CABasicAnimation *theAnimation;
+    UIDynamicAnimator *_animator;
+    UIGravityBehavior *_gravity;
+    UICollisionBehavior *_collision;
 }
 
 - (IBAction)resetLocation:(id)sender
 {
     [self.nearbyVenues removeAllObjects];
     [self setLabelsToBlank];
+    [self.activityIndicator startAnimating];
     [self.locationManager startUpdatingLocation];
 }
 
@@ -34,6 +45,7 @@
     [self.locationManager startUpdatingLocation];
     self.searchButton.alpha = .35;
     self.feedMeLabel.text = @"";
+    self.searchButton.enabled = NO;
 }
 
 +(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress
@@ -110,11 +122,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.view.backgroundColor = [UIColor colorWithRed:0.945 green:0.851 blue:0.6 alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [UIColor colorWithRed:0.945 green:0.851 blue:0.6 alpha:1], NSForegroundColorAttributeName,
+                                                                     [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1], NSForegroundColorAttributeName,
                                                                      [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
 }
 
@@ -126,8 +138,34 @@
     self.nearbyVenues = [[NSMutableArray alloc] init];
     self.locationManager = [[CLLocationManager alloc] init];
     [self setLabelsToBlank];
-    self.feedMeLabel.text = @"Click the Pizza above to search!";
+    self.feedMeLabel.text = @"Click the Pizza below to search!";
     [self theAnimation];
+    NSLog(@"VIEW DID APPEAR");
+    
+    UIView *barrier = [[UIView alloc] initWithFrame:CGRectMake(0, 380, 320, 20)];
+    barrier.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:barrier];
+    
+    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    _gravity = [[UIGravityBehavior alloc] initWithItems:@[self.searchButton]];
+    [_animator addBehavior:_gravity];
+    
+    _collision = [[UICollisionBehavior alloc] initWithItems:@[self.searchButton]];
+    _collision.translatesReferenceBoundsIntoBoundary = YES;
+    
+    CGPoint rightEdge = CGPointMake(barrier.frame.origin.x + barrier.frame.size.width, barrier.frame.origin.y);
+    [_collision addBoundaryWithIdentifier:@"barrier" fromPoint:barrier.frame.origin toPoint:rightEdge];
+    [_animator addBehavior:_collision];
+    
+    UIDynamicItemBehavior* itemBehaviour =
+    [[UIDynamicItemBehavior alloc] initWithItems:@[self.searchButton]];
+    itemBehaviour.elasticity = 0.7;
+    [_animator addBehavior:itemBehaviour];
+    _collision.collisionDelegate = self;
+    
+    UIDynamicItemBehavior *itemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.searchButton]];
+    itemBehavior.elasticity = 0.4;
+    [_animator addBehavior:itemBehavior];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -145,8 +183,9 @@
     [self.locationManager stopUpdatingLocation];
     [self.activityIndicator stopAnimating];
     self.searchButton.alpha = 1;
-    self.feedMeLabel.text = @"Click the Pizza above to search!";
+    self.feedMeLabel.text = @"Click the Pizza below to search!";
     [errorAlert show];
+    self.searchButton.enabled = YES;
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation

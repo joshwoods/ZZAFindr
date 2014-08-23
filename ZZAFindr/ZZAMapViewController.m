@@ -11,6 +11,7 @@
 @interface ZZAMapViewController () <MKMapViewDelegate, UINavigationBarDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
 
 @end
 
@@ -27,6 +28,16 @@
 
 - (IBAction)closeScreen:(id)sender{
     [self dismissViewControllerAnimated: YES completion: nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navBar.barTintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    
+    [self.navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1], NSForegroundColorAttributeName,
+                                                                     [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
 }
 
 - (void)viewDidLoad
