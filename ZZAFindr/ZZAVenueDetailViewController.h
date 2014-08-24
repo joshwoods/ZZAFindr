@@ -10,11 +10,8 @@
 #import "ZZAVenue.h"
 @import MapKit;
 
-@interface ZZAVenueDetailViewController : UITableViewController
+@interface ZZAVenueDetailViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) ZZAVenue *venue;
-
-+(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress;
--(NSData*)toJSON;
 
 @end

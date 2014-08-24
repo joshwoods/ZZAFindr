@@ -30,6 +30,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     UICollisionBehavior *_collision;
 }
 
+#pragma mark IBActions
+
 - (IBAction)resetLocation:(id)sender
 {
     [self.nearbyVenues removeAllObjects];
@@ -47,6 +49,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     self.feedMeLabel.text = @"";
     self.searchButton.enabled = NO;
 }
+
+#pragma mark JSON Parsing
 
 +(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress
 {

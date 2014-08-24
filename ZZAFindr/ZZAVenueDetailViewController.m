@@ -9,12 +9,13 @@
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 #import "ZZAVenueDetailViewController.h"
 
-@interface ZZAVenueDetailViewController ()
+@interface ZZAVenueDetailViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *phoneLabel;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
 @property (nonatomic, weak) IBOutlet UILabel *reviewLabel;
+@property (nonatomic, weak) IBOutlet UILabel *yelpLabel;
 
 @end
 
@@ -23,33 +24,22 @@
     NSString *_phoneNumber;
 }
 
-+(NSDictionary*)dictionaryWithContentsOfJSONURLString:(NSString*)urlAddress
-{
-    NSData* data = [NSData dataWithContentsOfURL: [NSURL URLWithString: urlAddress] ];
-    __autoreleasing NSError* error = nil;
-    id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-    if (error != nil) return nil;
-    return result;
-}
-
--(NSData*)toJSON
-{
-    NSError* error = nil;
-    id result = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];
-    if (error != nil) return nil;
-    return result;
-}
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
     self.view.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    
+    self.tableView.separatorColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1], NSForegroundColorAttributeName,
                                                                      [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
+    self.nameLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+    self.phoneLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+    self.addressLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+    self.reviewLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+    self.yelpLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+    
 }
 
 - (void)viewDidLoad
@@ -78,9 +68,34 @@
 
 #pragma mark TableView Info
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [cell setBackgroundColor:[UIColor clearColor]];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 5;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return 1;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    view.tintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 1 && indexPath.row == 0){
+        UIAlertView *phoneAlert = [[UIAlertView alloc]
+                                   initWithTitle:@"Are you sure?" message:@"You are about to call this fine establishment...click okay to proceed!" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Call", nil];
+        phoneAlert.tag = 1001;
+        [phoneAlert show];
         NSString *phoneString = [NSString stringWithFormat:@"tel://%@", _phoneNumber];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
     } else if (indexPath.section == 2 && indexPath.row == 0){
@@ -89,6 +104,22 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.reviewUrl]];
     } else if (indexPath.section == 4 && indexPath.row == 0){
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.yelpURL]];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1001){
+        {
+            if(buttonIndex == 1){
+                NSString *phoneString = [NSString stringWithFormat:@"tel://%@", _phoneNumber];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+            }
+        }
     }
 }
 
