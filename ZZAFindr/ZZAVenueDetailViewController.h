@@ -10,7 +10,7 @@
 #import "ZZAVenue.h"
 @import MapKit;
 
-@interface ZZAVenueDetailViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ZZAVenueDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) ZZAVenue *venue;
 

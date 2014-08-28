@@ -21,14 +21,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.view.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    self.tableView.separatorColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1], NSForegroundColorAttributeName,
-                                                                     [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
+    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    self.tableView.separatorColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
 }
 
 - (void)viewDidLoad
@@ -66,28 +60,25 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     
     // Configure the cell...
     ZZAVenue *venue = self.allVenues[indexPath.row];
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    bgColorView.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
     [cell setSelectedBackgroundView:bgColorView];
     
     UILabel *venueNameLabel = (UILabel *)[cell viewWithTag:100];
     venueNameLabel.text = venue.name;
-    venueNameLabel.textColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    [venueNameLabel setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
+    [venueNameLabel setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
     
     UILabel *reviewCountLabel = (UILabel *)[cell viewWithTag:101];
-    reviewCountLabel.textColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     reviewCountLabel.text = [NSString stringWithFormat:@"%@ Reviews", venue.reviewCount];
-    [reviewCountLabel setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
+    [reviewCountLabel setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
     
     UILabel *ratingLabel = (UILabel *)[cell viewWithTag:102];
-    ratingLabel.textColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     ratingLabel.text = [NSString stringWithFormat:@"Average User Rating: %@", venue.avgRating];
-    [ratingLabel setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
+    [ratingLabel setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
 
     UIImageView *disclosure = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]];
     cell.accessoryView = disclosure;

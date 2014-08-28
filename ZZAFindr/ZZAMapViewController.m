@@ -33,10 +33,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navBar.barTintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    
+    self.navBar.barTintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
     [self.navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1], NSForegroundColorAttributeName,
+                                                                     [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1], NSForegroundColorAttributeName,
                                                                      [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
 }
 
