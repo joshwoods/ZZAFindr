@@ -30,18 +30,22 @@
     [self dismissViewControllerAnimated: YES completion: nil];
 }
 
+- (IBAction)showUser
+{
+    [self updateMap];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
     self.navBar.barTintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    [self.navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1], NSForegroundColorAttributeName,
-                                                                     [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
+    [self updateMap];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.mapView.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -49,6 +53,25 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateMap
+{
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:self.venue.address
+                 completionHandler:^(NSArray* placemarks, NSError* error){
+                     if([placemarks count]){
+                         CLPlacemark *placemark = [placemarks objectAtIndex:0];
+                         CLLocation *location = placemark.location;
+                         CLLocationCoordinate2D coordinate = location.coordinate;
+                         MKCoordinateRegion region =
+                         MKCoordinateRegionMakeWithDistance(
+                                                            coordinate, 1000, 1000);
+                         [self.mapView setRegion:[self.mapView regionThatFits:region] animated:NO];
+                     } else {
+                         NSLog(@"%@", error);
+                     }
+                 }];
 }
 
 - (void)dealloc

@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 sdoowhsoj. All rights reserved.
 //
 
+@import MapKit;
 #import <UIKit/UIKit.h>
+#import "ZZAVenue.h"
 
 @interface ZZAMapViewController : UIViewController 
+
+@property (nonatomic, weak) ZZAVenue *venue;
 
 @end

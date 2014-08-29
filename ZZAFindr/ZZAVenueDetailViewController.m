@@ -8,14 +8,13 @@
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 #import "ZZAVenueDetailViewController.h"
+#import "ZZAMapViewController.h"
 
 @interface ZZAVenueDetailViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UIButton *mapsButton;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
-@property (nonatomic, weak) IBOutlet UILabel *phoneLabel;
-@property (nonatomic, weak) IBOutlet UILabel *reviewLabel;
 @property (nonatomic, weak) IBOutlet UILabel *yelpLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -36,8 +35,6 @@
                                                                      [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1], NSForegroundColorAttributeName,
                                                                      [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
     self.nameLabel.text = self.venue.name;
-    self.phoneLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    self.reviewLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
     self.yelpLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
     self.tableView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
 }
@@ -45,25 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //address formatting button logic
-    if(self.venue.address3 != nil){
-        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@ %@ %@, %@", self.venue.address1,self.venue.address2,self.venue.address3, self.venue.city, self.venue.state];
-    } else if(self.venue.address2 != nil){
-        self.addressLabel.text = [NSString stringWithFormat:@"%@\n%@ %@, %@", self.venue.address1,self.venue.address2, self.venue.city, self.venue.state];
-    } else {
-        self.addressLabel.text = [NSString stringWithFormat:@"%@ %@, %@", self.venue.address1, self.venue.city, self.venue.state];
-    }
-    
-    
-    self.phoneLabel.text = self.venue.phoneNumber;
-    self.reviewLabel.text = self.venue.excerpt;
-    if(self.venue.phoneNumber != nil){
-        self.phoneLabel.text = self.venue.phoneNumber;
-        _phoneNumber = self.venue.phoneNumber;
-    } else {
-        self.phoneLabel.text = @"No Phone Number Listed";
-    }
+    self.addressLabel.text = self.venue.address;
 }
 
 - (IBAction)showMapView:(id)sender{
@@ -83,7 +62,11 @@
         [cell setSelectedBackgroundView:bgColorView];
         UILabel *phone = (UILabel *)[cell viewWithTag:1001];
         UILabel *phoneNumberLabel = (UILabel *)[cell viewWithTag:1002];
-        phoneNumberLabel.text = self.venue.phoneNumber;
+        if(self.venue.phoneNumber != nil){
+            phoneNumberLabel.text = self.venue.phoneNumber;
+        } else {
+            phoneNumberLabel.text = @"N/A";
+        }
         [phone setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
         [phoneNumberLabel setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
         return cell;
@@ -101,16 +84,9 @@
         static NSString *YelpCellIdentifier = @"YelpCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:YelpCellIdentifier];
         cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-        
         UIView *bgColorView = [[UIView alloc] init];
         bgColorView.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
         [cell setSelectedBackgroundView:bgColorView];
-        
-        UILabel *phone = (UILabel *)[cell viewWithTag:1001];
-        UILabel *phoneNumberLabel = (UILabel *)[cell viewWithTag:1002];
-        phoneNumberLabel.text = self.venue.phoneNumber;
-        [phone setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
-        [phoneNumberLabel setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
         UILabel *yelp = (UILabel *)[cell viewWithTag:1004];
         [yelp setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
         return cell;
@@ -191,6 +167,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showMapView"]){
+        ZZAMapViewController *controller = segue.destinationViewController;
+        controller.venue = self.venue;
+    }
 }
 
 - (void)dealloc

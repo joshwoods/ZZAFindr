@@ -200,7 +200,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     userLongitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
     [self.locationManager stopUpdatingLocation];
     NSString *singleURLString = [NSString stringWithFormat:@"http://api.yelp.com/business_review_search?term=pizza&lat=%@&long=%@&radius=20&limit=100&ywsid=%@", userLatitude, userLongitude, ywsid];
-    NSLog(@"%@ \n %@", userLatitude, userLongitude);
     NSURL *singleAPIUrl = [NSURL URLWithString:singleURLString];
     dispatch_async(kBgQueue, ^{
         NSData* singleData = [NSData dataWithContentsOfURL:singleAPIUrl];
@@ -216,7 +215,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData
                                                          options:kNilOptions
                                                            error:&error];
-    NSLog(@"%@", json);
     NSArray *venues = json[@"businesses"];
     for(NSDictionary *dict in venues)
     {
@@ -239,7 +237,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
             {
                 continue;
             }
-                        
+            
             //check to make sure that address 2 & 3 are assigned to nil if there is nothing there
             if(venue.address2)
             {
@@ -251,55 +249,25 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                 venue.address3 = nil;
             }
             
-            //assign longitude and latitude coordinates to the venue and then find the distance between user and venue
-            if(venue.address3 != nil)
-            {
-                CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-                NSString *addressForGeocoder = [NSString stringWithFormat:@"%@ %@ %@ %@ %@", venue.address1, venue.address2, venue.address3, venue.city, venue.state];
-                [geocoder geocodeAddressString:addressForGeocoder completionHandler:^(NSArray *placemarks, NSError *error)
-                 {
-                     CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                     CLLocation *location = placemark.location;
-                     venue.venueLatitude = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-                     venue.venueLongitude = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
-                     CLLocation *locA = [[CLLocation alloc] initWithLatitude:[userLatitude doubleValue] longitude:[userLongitude doubleValue]];
-                     CLLocation *locB = [[CLLocation alloc] initWithLatitude:[venue.venueLatitude doubleValue] longitude:[venue.venueLongitude doubleValue]];
-                     CLLocationDistance distance = [locA distanceFromLocation:locB] * 0.00056;
-                     venue.distance = [NSString stringWithFormat:@"%f", distance];
-                     //NSLog(@"%@ %@ meters away", venue.name, venue.distance);
-                 }];
-            } else if (venue.address2 != nil){
-                CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-                NSString *addressForGeocoder = [NSString stringWithFormat:@"%@ %@ %@ %@", venue.address1, venue.address2, venue.city, venue.state];
-                [geocoder geocodeAddressString:addressForGeocoder completionHandler:^(NSArray *placemarks, NSError *error)
-                 {
-                     CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                     CLLocation *location = placemark.location;
-                     venue.venueLatitude = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-                     venue.venueLongitude = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
-                     CLLocation *locA = [[CLLocation alloc] initWithLatitude:[userLatitude doubleValue] longitude:[userLongitude doubleValue]];
-                     CLLocation *locB = [[CLLocation alloc] initWithLatitude:[venue.venueLatitude doubleValue] longitude:[venue.venueLongitude doubleValue]];
-                     CLLocationDistance distance = [locA distanceFromLocation:locB];
-                     venue.distance = [NSString stringWithFormat:@"%f", distance];
-                     //NSLog(@"%@ %@ meters away", venue.name, venue.distance);
-                 }];
+            if(venue.address3 != nil){
+                venue.address = [NSString stringWithFormat:@"%@\n%@ %@ %@, %@", venue.address1, venue.address2, venue.address3, venue.city, venue.state];
+            } else if(venue.address2 != nil){
+                venue.address = [NSString stringWithFormat:@"%@\n%@ %@, %@", venue.address1, venue.address2, venue.city, venue.state];
             } else {
-                CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-                NSString *addressForGeocoder = [NSString stringWithFormat:@"%@ %@ %@", venue.address1, venue.city, venue.state];
-                [geocoder geocodeAddressString:addressForGeocoder completionHandler:^(NSArray *placemarks, NSError *error)
-                 {
-                     CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                     CLLocation *location = placemark.location;
-                     venue.venueLatitude = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-                     venue.venueLongitude = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
-                     CLLocation *locA = [[CLLocation alloc] initWithLatitude:[userLatitude doubleValue] longitude:[userLongitude doubleValue]];
-                     CLLocation *locB = [[CLLocation alloc] initWithLatitude:[venue.venueLatitude doubleValue] longitude:[venue.venueLongitude doubleValue]];
-                     CLLocationDistance distance = [locA distanceFromLocation:locB];
-                     venue.distance = [NSString stringWithFormat:@"%f", distance];
-                     //NSLog(@"%@ %@ meters away", venue.name, venue.distance);
-                 }];
+                venue.address = [NSString stringWithFormat:@"%@\n%@, %@", venue.address1, venue.city, venue.state];
             }
             
+            //assign longitude and latitude coordinates to the venue and then find the distance between user and venue
+            
+//            CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//            [geocoder geocodeAddressString:venue.address completionHandler:^(NSArray *placemarks, NSError *error)
+//             {
+//                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//                 CLLocation *location = placemark.location;
+//                 venue.venueLatitude = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
+//                 venue.venueLongitude = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
+//                 NSLog(@"%@ %@", venue.venueLatitude, venue.venueLongitude);
+//             }];
             
             //final filter categories that should be brought into the app (weird results showing up in results)
             if(![venue.category isEqualToString:@"chiropractors"])
@@ -328,7 +296,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         ZZATableViewController *transferViewController = segue.destinationViewController;
         NSLog(@"prepareForSegue: %@", segue.identifier);
         transferViewController.allVenues = self.nearbyVenues;
-        NSLog(@"%lu", (unsigned long)[self.nearbyVenues count]);
     }
 }
 

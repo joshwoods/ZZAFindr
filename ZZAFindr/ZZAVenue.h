@@ -17,6 +17,7 @@
 @property (nonatomic, strong) ZZACategory *reviews;
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *address1;
 @property (nonatomic, strong) NSString *address2;
 @property (nonatomic, strong) NSString *address3;
