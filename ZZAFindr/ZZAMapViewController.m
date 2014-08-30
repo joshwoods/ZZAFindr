@@ -7,8 +7,9 @@
 //
 
 #import "ZZAMapViewController.h"
+#import "PlaceAnnotation.h"
 
-@interface ZZAMapViewController () <MKMapViewDelegate, UINavigationBarDelegate>
+@interface ZZAMapViewController () <MKMapViewDelegate, UINavigationBarDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
@@ -16,6 +17,9 @@
 @end
 
 @implementation ZZAMapViewController
+{
+    MKCoordinateRegion _regionGlobal;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +59,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+	MKPinAnnotationView *annotationView = nil;
+	if ([annotation isKindOfClass:[PlaceAnnotation class]])
+	{
+		annotationView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+		if (annotationView == nil)
+		{
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            
+			annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+			annotationView.canShowCallout = YES;
+			annotationView.animatesDrop = NO;
+            annotationView.leftCalloutAccessoryView = button;
+		}
+	}
+	return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    [self.mapView selectAnnotation:[[self.mapView annotations] firstObject] animated:YES];
+}
+
 - (void)updateMap
 {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
@@ -62,21 +92,39 @@
                  completionHandler:^(NSArray* placemarks, NSError* error){
                      if([placemarks count]){
                          CLPlacemark *placemark = [placemarks objectAtIndex:0];
+                         NSLog(@"%@", placemark);
                          CLLocation *location = placemark.location;
                          CLLocationCoordinate2D coordinate = location.coordinate;
                          MKCoordinateRegion region =
                          MKCoordinateRegionMakeWithDistance(
                                                             coordinate, 1000, 1000);
-                         [self.mapView setRegion:[self.mapView regionThatFits:region] animated:NO];
+                         PlaceAnnotation *annotation = [[PlaceAnnotation alloc] init];
+                         annotation.coordinate = coordinate;
+                         annotation.title = self.venue.name;
+                         [self.mapView addAnnotation:annotation];
+                         [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+
                      } else {
                          NSLog(@"%@", error);
+                         UIAlertView *phoneAlert = [[UIAlertView alloc]
+                                                    initWithTitle:@"Woops!" message:@"Looks like there is an issue with your service, try again later!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Okay!", nil];
+                         phoneAlert.tag = 1001;
+                         [phoneAlert show];
                      }
                  }];
 }
 
-- (void)dealloc
+#pragma mark - AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"Dealloc %@", self);
+    if (alertView.tag == 1001){
+        {
+            if(buttonIndex == 0){
+                [self dismissViewControllerAnimated: YES completion: nil];
+            }
+        }
+    }
 }
 
 #pragma mark - UINavigationBarDelegate
@@ -84,6 +132,11 @@
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
 {
     return UIBarPositionTopAttached;
+}
+
+- (void)dealloc
+{
+    NSLog(@"Dealloc %@", self);
 }
 
 @end

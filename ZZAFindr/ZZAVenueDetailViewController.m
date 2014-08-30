@@ -9,8 +9,9 @@
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 #import "ZZAVenueDetailViewController.h"
 #import "ZZAMapViewController.h"
+#import "ZZADismissController.h"
 
-@interface ZZAVenueDetailViewController () <UIAlertViewDelegate>
+@interface ZZAVenueDetailViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UIButton *mapsButton;
@@ -23,17 +24,22 @@
 @implementation ZZAVenueDetailViewController
 {
     NSString *_phoneNumber;
+    BOOL _reviewIsVisible;
+    ZZADismissController *_dismissViewController;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        _dismissViewController = [ZZADismissController new];
+    }
+    return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pizzapin"]];
     self.view.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1], NSForegroundColorAttributeName,
-                                                                     [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
     self.nameLabel.text = self.venue.name;
     self.yelpLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
     self.tableView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
@@ -42,6 +48,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@", self.venue.excerpt);
+    self.tableView.delegate = self;
+    _reviewIsVisible = NO;
     self.addressLabel.text = self.venue.address;
 }
 
@@ -80,7 +89,7 @@
         UILabel *review = (UILabel *)[cell viewWithTag:1003];
         [review setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
         return cell;
-    } else {
+    } else if(indexPath.row == 3){
         static NSString *YelpCellIdentifier = @"YelpCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:YelpCellIdentifier];
         cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
@@ -89,6 +98,23 @@
         [cell setSelectedBackgroundView:bgColorView];
         UILabel *yelp = (UILabel *)[cell viewWithTag:1004];
         [yelp setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
+        return cell;
+    } else {
+        static NSString *ExcerptCellIdentifier = @"ExcerptCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExcerptCellIdentifier];
+        cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+        [cell setSelectedBackgroundView:bgColorView];
+        UILabel *excerpt = (UILabel *)[cell viewWithTag:1005];
+        excerpt.text = self.venue.excerpt;
+        CGRect rect = CGRectMake(20, 5, 280, 10000);
+        excerpt.frame = rect;
+        [excerpt sizeToFit];
+        rect.size.height = excerpt.frame.size.height;
+        excerpt.frame = rect;
+        excerpt.hidden = YES;
+        [excerpt setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
         return cell;
     }
 }
@@ -102,7 +128,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 3;
+    return 4;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -114,16 +140,64 @@
         [phoneAlert show];
         NSString *phoneString = [NSString stringWithFormat:@"tel://%@", _phoneNumber];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+        [self hideReview];
     } else if (indexPath.row == 1){
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.reviewUrl]];
+        //        [self performSegueWithIdentifier:@"showReview" sender:self];
+        if(_reviewIsVisible){
+            [self hideReview];
+        } else {
+            [self showReview];
+        }
+        NSLog(@"Show Review!");
     } else if (indexPath.row == 2){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.reviewUrl]];
+    } else if (indexPath.row == 3){
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.venue.yelpURL]];
     }
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark AlertView Delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 2) {
+        return _reviewIsVisible ? 115.0f : 0.0f;
+    } else {
+        return 60.0f;
+    }
+}
+
+-(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (void)showReview
+{
+    UILabel *excerpt = (UILabel *)[self.view viewWithTag:1005];
+    _reviewIsVisible = YES;
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    excerpt.hidden = NO;
+    excerpt.alpha = 0.0f;
+    [UIView animateWithDuration:0.25 animations:^{
+        excerpt.alpha = 1.0f;
+    }];
+}
+
+- (void)hideReview
+{
+    UILabel *excerpt = (UILabel *)[self.view viewWithTag:1005];
+    _reviewIsVisible = NO;
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    [UIView animateWithDuration:0.25 animations:^{
+        excerpt.alpha = 0.0f;
+    } completion:^(BOOL finished){
+        excerpt.hidden = YES;
+    }];
+}
+
+#pragma mark - AlertView Delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -137,30 +211,11 @@
     }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 2) {
-//        CGRect rect = CGRectMake(20, 5, 280, 10000);
-//        self.addressLabel.frame = rect;
-//        [self.addressLabel sizeToFit];
-//        rect.size.height = self.addressLabel.frame.size.height;
-//        self.addressLabel.frame = rect;
-//        return self.addressLabel.frame.size.height + 10;
-//    } else if (indexPath.section == 3) {
-//        CGRect rect = CGRectMake(20, 5, 280, 10000);
-//        self.reviewLabel.frame = rect;
-//        [self.reviewLabel sizeToFit];
-//        rect.size.height = self.reviewLabel.frame.size.height;
-//        self.reviewLabel.frame = rect;
-//        return self.reviewLabel.frame.size.height + 10;
-//    } else {
-//        return 44;
-//    }
-//}
+#pragma mark - Animation Delegate
 
--(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
-    return 1;
+    return _dismissViewController;
 }
 
 - (void)didReceiveMemoryWarning
@@ -173,6 +228,7 @@
 {
     if([segue.identifier isEqualToString:@"showMapView"]){
         ZZAMapViewController *controller = segue.destinationViewController;
+        controller.transitioningDelegate = self;
         controller.venue = self.venue;
     }
 }

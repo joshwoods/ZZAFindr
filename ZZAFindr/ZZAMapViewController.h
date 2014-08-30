@@ -13,5 +13,6 @@
 @interface ZZAMapViewController : UIViewController 
 
 @property (nonatomic, weak) ZZAVenue *venue;
+@property (nonatomic, assign) MKCoordinateRegion *boundingRegion;
 
 @end
