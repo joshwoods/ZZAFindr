@@ -10,14 +10,16 @@
 #import "ZZAVenueDetailViewController.h"
 #import "ZZAMapViewController.h"
 #import "ZZADismissController.h"
+#import "ZZAPresentController.h"
+#import "UIImage+ImageEffects.h"
 
-@interface ZZAVenueDetailViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate>
+@interface ZZAVenueDetailViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate, UINavigationBarDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UIButton *mapsButton;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
-@property (nonatomic, weak) IBOutlet UILabel *yelpLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
 
 @end
 
@@ -26,11 +28,17 @@
     NSString *_phoneNumber;
     BOOL _reviewIsVisible;
     ZZADismissController *_dismissViewController;
+    ZZAPresentController *_presentViewController;
+}
+
+- (IBAction)closeScreen:(id)sender{
+    [self dismissViewControllerAnimated: YES completion: nil];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         _dismissViewController = [ZZADismissController new];
+        _presentViewController = [ZZAPresentController new];
     }
     return self;
 }
@@ -38,17 +46,20 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pizzapin"]];
-    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    UIImage *backgroundImage = [UIImage imageNamed:@"oven"];
+    UIImage *backgroundBlurred = [backgroundImage applyDarkEffect];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundBlurred];
+    self.navBar.barTintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:0.01];
     self.nameLabel.text = self.venue.name;
-    self.yelpLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    self.tableView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:0.01];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSLog(@"%@", self.venue.excerpt);
+    self.navBar.delegate = self;
     self.tableView.delegate = self;
     _reviewIsVisible = NO;
     self.addressLabel.text = self.venue.address;
@@ -65,9 +76,9 @@
     if(indexPath.row == 0){
         static NSString *PhoneCellIdentifier = @"PhoneCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PhoneCellIdentifier];
-        cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+        cell.backgroundColor = [UIColor clearColor];
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+        bgColorView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:.4];
         [cell setSelectedBackgroundView:bgColorView];
         UILabel *phone = (UILabel *)[cell viewWithTag:1001];
         UILabel *phoneNumberLabel = (UILabel *)[cell viewWithTag:1002];
@@ -76,35 +87,35 @@
         } else {
             phoneNumberLabel.text = @"N/A";
         }
-        [phone setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
-        [phoneNumberLabel setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
+        [phone setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
+        [phoneNumberLabel setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
         return cell;
     } else if(indexPath.row == 1){
         static NSString *ReviewCellIdentifier = @"ReviewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReviewCellIdentifier];
-        cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+        cell.backgroundColor = [UIColor clearColor];
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+        bgColorView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:.4];
         [cell setSelectedBackgroundView:bgColorView];
         UILabel *review = (UILabel *)[cell viewWithTag:1003];
-        [review setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
+        [review setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
         return cell;
     } else if(indexPath.row == 3){
         static NSString *YelpCellIdentifier = @"YelpCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:YelpCellIdentifier];
-        cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+        cell.backgroundColor = [UIColor clearColor];
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+        bgColorView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:.4];
         [cell setSelectedBackgroundView:bgColorView];
         UILabel *yelp = (UILabel *)[cell viewWithTag:1004];
-        [yelp setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
+        [yelp setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
         return cell;
     } else {
         static NSString *ExcerptCellIdentifier = @"ExcerptCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExcerptCellIdentifier];
-        cell.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+        cell.backgroundColor = [UIColor clearColor];
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+        bgColorView.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:.4];
         [cell setSelectedBackgroundView:bgColorView];
         UILabel *excerpt = (UILabel *)[cell viewWithTag:1005];
         excerpt.text = self.venue.excerpt;
@@ -114,7 +125,7 @@
         rect.size.height = excerpt.frame.size.height;
         excerpt.frame = rect;
         excerpt.hidden = YES;
-        [excerpt setHighlightedTextColor:[UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1]];
+        [excerpt setHighlightedTextColor:[UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1]];
         return cell;
     }
 }
@@ -129,6 +140,16 @@
 {
     // Return the number of rows in the section.
     return 4;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,11 +185,6 @@
     } else {
         return 60.0f;
     }
-}
-
--(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 1;
 }
 
 - (void)showReview
@@ -218,6 +234,11 @@
     return _dismissViewController;
 }
 
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return _presentViewController;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -231,6 +252,13 @@
         controller.transitioningDelegate = self;
         controller.venue = self.venue;
     }
+}
+
+#pragma mark - UINavigationBarDelegate
+
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
 }
 
 - (void)dealloc

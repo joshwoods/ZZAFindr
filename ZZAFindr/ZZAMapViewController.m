@@ -18,7 +18,7 @@
 
 @implementation ZZAMapViewController
 {
-    MKCoordinateRegion _regionGlobal;
+    MKPlacemark *_globalPlacemark;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,7 +34,7 @@
     [self dismissViewControllerAnimated: YES completion: nil];
 }
 
-- (IBAction)showUser
+- (IBAction)getDirections
 {
     [self updateMap];
 }
@@ -42,7 +42,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navBar.barTintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+    self.navBar.barTintColor = [UIColor colorWithRed:0.231 green:0.224 blue:0.478 alpha:1];
+    self.navBar.tintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
     [self updateMap];
 }
 
@@ -66,15 +67,14 @@
 	MKPinAnnotationView *annotationView = nil;
 	if ([annotation isKindOfClass:[PlaceAnnotation class]])
 	{
-		annotationView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+        static NSString *Identifier = @"Pin";
+		annotationView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:Identifier];
 		if (annotationView == nil)
 		{
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            
-			annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+			annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:Identifier];
+            annotationView.image = [UIImage imageNamed:@"pizzapin"];
 			annotationView.canShowCallout = YES;
 			annotationView.animatesDrop = NO;
-            annotationView.leftCalloutAccessoryView = button;
 		}
 	}
 	return annotationView;
@@ -92,7 +92,8 @@
                  completionHandler:^(NSArray* placemarks, NSError* error){
                      if([placemarks count]){
                          CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                         NSLog(@"%@", placemark);
+                         MKPlacemark *plerp = [[MKPlacemark alloc] initWithPlacemark:placemark];
+                         _globalPlacemark = plerp;
                          CLLocation *location = placemark.location;
                          CLLocationCoordinate2D coordinate = location.coordinate;
                          MKCoordinateRegion region =
@@ -102,7 +103,7 @@
                          annotation.coordinate = coordinate;
                          annotation.title = self.venue.name;
                          [self.mapView addAnnotation:annotation];
-                         [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+                         [self.mapView setRegion:[self.mapView regionThatFits:region] animated:NO];
 
                      } else {
                          NSLog(@"%@", error);
@@ -132,6 +133,11 @@
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
 {
     return UIBarPositionTopAttached;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)dealloc

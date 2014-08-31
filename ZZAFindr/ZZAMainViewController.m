@@ -11,12 +11,12 @@
 #import "ZZAVenue.h"
 #define ywsid @"uhdAgMc2ViejHvGQixqfuQ"
 #import "ZZATableViewController.h"
-#define UIColorFromRGB(rgbValue) [UIColor \
-colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#import "ZZADismissController.h"
+#import "ZZAPresentController.h"
+#import "ZZAAboutViewController.h"
+#import "UIImage+ImageEffects.h"
 
-@interface ZZAMainViewController () <UICollisionBehaviorDelegate>
+@interface ZZAMainViewController () <UICollisionBehaviorDelegate, UIViewControllerTransitioningDelegate>
 
 @end
 
@@ -28,9 +28,24 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     UIDynamicAnimator *_animator;
     UIGravityBehavior *_gravity;
     UICollisionBehavior *_collision;
+    ZZADismissController *_dismissViewController;
+    ZZAPresentController *_presentViewController;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        _dismissViewController = [ZZADismissController new];
+        _presentViewController = [ZZAPresentController new];
+    }
+    return self;
 }
 
 #pragma mark IBActions
+
+- (IBAction)aboutButton:(id)sender
+{
+    [self performSegueWithIdentifier:@"aboutButton" sender:self];
+}
 
 - (IBAction)resetLocation:(id)sender
 {
@@ -126,12 +141,9 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1], NSForegroundColorAttributeName,
-                                                                     [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:24.0], NSFontAttributeName, nil]];
+    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+    UIImage *backgroundBlurred = [backgroundImage applyDarkEffect];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundBlurred];
 }
 
 - (void)viewDidLoad
@@ -257,18 +269,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                 venue.address = [NSString stringWithFormat:@"%@\n%@, %@", venue.address1, venue.city, venue.state];
             }
             
-            //assign longitude and latitude coordinates to the venue and then find the distance between user and venue
-            
-//            CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-//            [geocoder geocodeAddressString:venue.address completionHandler:^(NSArray *placemarks, NSError *error)
-//             {
-//                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//                 CLLocation *location = placemark.location;
-//                 venue.venueLatitude = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-//                 venue.venueLongitude = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
-//                 NSLog(@"%@ %@", venue.venueLatitude, venue.venueLongitude);
-//             }];
-            
             //final filter categories that should be brought into the app (weird results showing up in results)
             if(![venue.category isEqualToString:@"chiropractors"])
             {
@@ -287,6 +287,18 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [self verbiageLogic];
 }
 
+#pragma mark - Animation Delegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return _dismissViewController;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return _presentViewController;
+}
+
 #pragma Segue Info
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton *)sender
@@ -294,15 +306,28 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     if([segue.identifier isEqualToString:@"tableViewSegue"])
     {
         ZZATableViewController *transferViewController = segue.destinationViewController;
-        NSLog(@"prepareForSegue: %@", segue.identifier);
+        transferViewController.transitioningDelegate = self;
         transferViewController.allVenues = self.nearbyVenues;
+    } else {
+        ZZAAboutViewController *transferViewController = segue.destinationViewController;
+        transferViewController.transitioningDelegate = self;
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    NSLog(@"COME BACK MAIN SCREEN!");
 }
 
 @end

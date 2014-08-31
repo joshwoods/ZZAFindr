@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F754CA3D19B23D1300FE127C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F754CA3C19B23D1300FE127C /* UIImage+ImageEffects.m */; };
+		F754CA4019B2816A00FE127C /* ZZAPresentController.m in Sources */ = {isa = PBXBuildFile; fileRef = F754CA3F19B2816A00FE127C /* ZZAPresentController.m */; };
 		F75EE9EC19A5914100F943DC /* ZZAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */; };
 		F75EE9EE19A5919B00F943DC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75EE9ED19A5919A00F943DC /* MapKit.framework */; };
 		F77BC3B6190D8A21008F5167 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */; };
@@ -45,6 +47,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F754CA3B19B23D1300FE127C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		F754CA3C19B23D1300FE127C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		F754CA3E19B2816A00FE127C /* ZZAPresentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAPresentController.h; sourceTree = "<group>"; };
+		F754CA3F19B2816A00FE127C /* ZZAPresentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAPresentController.m; sourceTree = "<group>"; };
 		F75EE9EA19A5914100F943DC /* ZZAMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAMapViewController.h; sourceTree = "<group>"; };
 		F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAMapViewController.m; sourceTree = "<group>"; };
 		F75EE9ED19A5919A00F943DC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -166,8 +172,12 @@
 				F7EF95A819205F6F00ACFDD7 /* ZZAReview.m */,
 				F75EE9EA19A5914100F943DC /* ZZAMapViewController.h */,
 				F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */,
+				F754CA3E19B2816A00FE127C /* ZZAPresentController.h */,
+				F754CA3F19B2816A00FE127C /* ZZAPresentController.m */,
 				F7C944BD19B1629D009386E3 /* ZZADismissController.h */,
 				F7C944BE19B1629D009386E3 /* ZZADismissController.m */,
+				F754CA3B19B23D1300FE127C /* UIImage+ImageEffects.h */,
+				F754CA3C19B23D1300FE127C /* UIImage+ImageEffects.m */,
 				F7E091A4190D8020005A967A /* Supporting Files */,
 				F7C944C019B18432009386E3 /* PlaceAnnotation.h */,
 				F7C944C119B18432009386E3 /* PlaceAnnotation.m */,
@@ -307,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7E091E3190D8196005A967A /* ZZAVenueDetailViewController.m in Sources */,
+				F754CA3D19B23D1300FE127C /* UIImage+ImageEffects.m in Sources */,
 				F75EE9EC19A5914100F943DC /* ZZAMapViewController.m in Sources */,
 				F7E091E6190D81C8005A967A /* ZZAVenue.m in Sources */,
 				F7E091E0190D8156005A967A /* ZZAAboutViewController.m in Sources */,
@@ -316,6 +327,7 @@
 				F7E091AE190D8020005A967A /* ZZAAppDelegate.m in Sources */,
 				F7C944C219B18432009386E3 /* PlaceAnnotation.m in Sources */,
 				F7E091DD190D8122005A967A /* ZZATableViewController.m in Sources */,
+				F754CA4019B2816A00FE127C /* ZZAPresentController.m in Sources */,
 				F7E091AA190D8020005A967A /* main.m in Sources */,
 				F77F8EAA192046E700767290 /* ZZACategory.m in Sources */,
 			);

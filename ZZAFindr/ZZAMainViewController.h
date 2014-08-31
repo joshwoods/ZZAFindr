@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *feedMeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *venuesInformationLabel;
 @property (weak, nonatomic) IBOutlet UIButton *moreResultsButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *restartButton;
+@property (weak, nonatomic) IBOutlet UIButton *restartButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 - (IBAction)resetLocation:(id)sender;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ZZAVenue.h"
 
-@interface ZZATableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ZZATableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) ZZAVenue *venue;
 @property (nonatomic, strong) NSMutableArray *allVenues;

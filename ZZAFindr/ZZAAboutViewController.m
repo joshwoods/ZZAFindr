@@ -7,6 +7,7 @@
 //
 
 #import "ZZAAboutViewController.h"
+#import "UIImage+ImageEffects.h"
 
 @interface ZZAAboutViewController ()
 
@@ -14,13 +15,19 @@
 
 @implementation ZZAAboutViewController
 
+- (IBAction)closeScreen:(id)sender{
+    [self dismissViewControllerAnimated: YES completion: nil];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    UIImage *backgroundImage = [UIImage imageNamed:@"slice"];
+    UIImage *backgroundBlurred = [backgroundImage applyDarkEffect];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundBlurred];
     
-    self.thankYouLabel.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
-    self.powered.textColor = [UIColor colorWithRed:0.749 green:0.224 blue:0.173 alpha:1];
+    self.thankYouLabel.textColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    self.powered.textColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
 }
 
 - (void)viewDidLoad
@@ -34,6 +41,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)dealloc
