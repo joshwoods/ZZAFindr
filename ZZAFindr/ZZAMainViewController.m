@@ -11,12 +11,9 @@
 #import "ZZAVenue.h"
 #define ywsid @"uhdAgMc2ViejHvGQixqfuQ"
 #import "ZZATableViewController.h"
-#import "ZZADismissController.h"
-#import "ZZAPresentController.h"
-#import "ZZAAboutViewController.h"
-#import "UIImage+ImageEffects.h"
+#import "UIImageEffects.h"
 
-@interface ZZAMainViewController () <UICollisionBehaviorDelegate, UIViewControllerTransitioningDelegate>
+@interface ZZAMainViewController () <UICollisionBehaviorDelegate>
 
 @end
 
@@ -28,23 +25,12 @@
     UIDynamicAnimator *_animator;
     UIGravityBehavior *_gravity;
     UICollisionBehavior *_collision;
-    ZZADismissController *_dismissViewController;
-    ZZAPresentController *_presentViewController;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        _dismissViewController = [ZZADismissController new];
-        _presentViewController = [ZZAPresentController new];
-    }
-    return self;
 }
 
 #pragma mark IBActions
 
-- (IBAction)aboutButton:(id)sender
-{
-    [self performSegueWithIdentifier:@"aboutButton" sender:self];
+- (IBAction)moreResults:(id)sender{
+    [self performSegueWithIdentifier:@"tableViewSegue" sender:self];
 }
 
 - (IBAction)resetLocation:(id)sender
@@ -141,9 +127,19 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
-    UIImage *backgroundBlurred = [backgroundImage applyDarkEffect];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundBlurred];
+    self.image = [UIImage imageNamed:@"background"];
+    [self updateImage:nil];
+    UIGraphicsBeginImageContextWithOptions(self.image.size, NO, self.image.scale);
+    [self.image drawAtPoint:CGPointZero];
+    self.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+}
+
+- (void)updateImage:(id)sender
+{
+    UIImage *effectImage = nil;
+    effectImage = [UIImageEffects imageByApplyingDarkEffectToImage:self.image];
+    self.imageView.image = effectImage;
 }
 
 - (void)viewDidLoad
@@ -287,18 +283,6 @@
     [self verbiageLogic];
 }
 
-#pragma mark - Animation Delegate
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
-    return _dismissViewController;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
-{
-    return _presentViewController;
-}
-
 #pragma Segue Info
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton *)sender
@@ -306,11 +290,7 @@
     if([segue.identifier isEqualToString:@"tableViewSegue"])
     {
         ZZATableViewController *transferViewController = segue.destinationViewController;
-        transferViewController.transitioningDelegate = self;
         transferViewController.allVenues = self.nearbyVenues;
-    } else {
-        ZZAAboutViewController *transferViewController = segue.destinationViewController;
-        transferViewController.transitioningDelegate = self;
     }
 }
 

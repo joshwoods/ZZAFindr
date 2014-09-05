@@ -10,13 +10,10 @@
 #import "ZZAVenue.h"
 #import "ZZAVenueDetailViewController.h"
 #import "UIImage+ImageEffects.h"
-
-#define METERS_PER_MILE .000621371
+#import "UIImageEffects.h"
 
 @interface ZZATableViewController ()
 
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
 @end
 
 @implementation ZZATableViewController
@@ -28,36 +25,34 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    UIImage *backgroundImage = [UIImage imageNamed:@"neon"];
-    UIImage *backgroundBlurred = [backgroundImage applyDarkEffect];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundBlurred];
-    self.navBar.barTintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:0.01];
-}
-
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    self.navBar.barTintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:1];
+    self.navBar.tintColor = [UIColor blackColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.image = [UIImage imageNamed:@"neon"];
+    [self updateImage:nil];
+    UIGraphicsBeginImageContextWithOptions(self.image.size, NO, self.image.scale);
+    [self.image drawAtPoint:CGPointZero];
+    self.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tableView.delegate = self;
-    self.navBar.delegate = self;
+    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     self.venue = [[ZZAVenue alloc] init];
+    self.navBar.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning
+- (void)updateImage:(id)sender
 {
-    [super didReceiveMemoryWarning];
+    UIImage *effectImage = nil;
+    effectImage = [UIImageEffects imageByApplyingDarkEffectToImage:self.image];
+    self.imageView.image = effectImage;
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -116,6 +111,11 @@
         ZZAVenueDetailViewController *controller = segue.destinationViewController;
         controller.venue = self.venue;
     }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 - (void)dealloc

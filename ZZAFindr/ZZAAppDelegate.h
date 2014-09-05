@@ -7,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZZAMainViewController.h"
 
 @interface ZZAAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) UINavigationController *navigationController;
-@property (strong, nonatomic) ZZAMainViewController *firstVC;
 
 @end

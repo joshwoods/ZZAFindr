@@ -12,14 +12,14 @@
 #import "ZZADismissController.h"
 #import "ZZAPresentController.h"
 #import "UIImage+ImageEffects.h"
+#import "UIImageEffects.h"
 
-@interface ZZAVenueDetailViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate, UINavigationBarDelegate>
+@interface ZZAVenueDetailViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UIButton *mapsButton;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
 
 @end
 
@@ -31,10 +31,6 @@
     ZZAPresentController *_presentViewController;
 }
 
-- (IBAction)closeScreen:(id)sender{
-    [self dismissViewControllerAnimated: YES completion: nil];
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         _dismissViewController = [ZZADismissController new];
@@ -43,30 +39,47 @@
     return self;
 }
 
+#pragma mark - IBActions
+
+- (IBAction)closeScreen:(id)sender{
+    [self dismissViewControllerAnimated: YES completion: nil];
+}
+
+- (IBAction)showMapView:(id)sender{
+    [self performSegueWithIdentifier:@"showMapView" sender:self];
+}
+
+#pragma mark - Views Appearing
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    UIImage *backgroundImage = [UIImage imageNamed:@"oven"];
-    UIImage *backgroundBlurred = [backgroundImage applyDarkEffect];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundBlurred];
-    self.navBar.barTintColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:0.01];
+    self.image = [UIImage imageNamed:@"pizzaOven"];
+    [self updateImage:nil];
+    UIGraphicsBeginImageContextWithOptions(self.image.size, NO, self.image.scale);
+    [self.image drawAtPoint:CGPointZero];
+    self.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     self.nameLabel.text = self.venue.name;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:0.01];
+    self.tableView.separatorColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:0.1];
+}
+
+- (void)updateImage:(id)sender
+{
+    UIImage *effectImage = nil;
+    effectImage = [UIImageEffects imageByApplyingDarkEffectToImage:self.image];
+    self.imageView.image = effectImage;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSLog(@"%@", self.venue.excerpt);
-    self.navBar.delegate = self;
     self.tableView.delegate = self;
+    self.navBar.delegate = self;
     _reviewIsVisible = NO;
     self.addressLabel.text = self.venue.address;
-}
-
-- (IBAction)showMapView:(id)sender{
-    [self performSegueWithIdentifier:@"showMapView" sender:self];
 }
 
 #pragma mark TableView Info
@@ -132,13 +145,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
+    // Return the number of sections. This is hard coded because there will only ever be 1 section.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
+    // Return the number of rows in the section. This is hardcoded because there will only ever be 4 rows
     return 4;
 }
 
@@ -156,14 +169,10 @@
 {
     if(indexPath.row == 0){
         UIAlertView *phoneAlert = [[UIAlertView alloc]
-                                   initWithTitle:@"Are you sure?" message:@"You are about to call this fine establishment...click okay to proceed!" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Okay!", nil];
-        phoneAlert.tag = 1001;
+                                   initWithTitle:@"Are you sure?" message:@"You are about to call this fine establishment...click okay to proceed!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Okay!", nil];
         [phoneAlert show];
-        NSString *phoneString = [NSString stringWithFormat:@"tel://%@", _phoneNumber];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
         [self hideReview];
     } else if (indexPath.row == 1){
-        //        [self performSegueWithIdentifier:@"showReview" sender:self];
         if(_reviewIsVisible){
             [self hideReview];
         } else {
@@ -217,13 +226,27 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 1001){
-        {
-            if(buttonIndex == 1){
-                NSString *phoneString = [NSString stringWithFormat:@"tel://%@", _phoneNumber];
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
-            }
-        }
+    if(buttonIndex == [alertView cancelButtonIndex]){
+        NSLog(@"Cancelled.");
+    } else {
+        NSString *phoneString = [NSString stringWithFormat:@"tel://%@", _phoneNumber];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+    }
+}
+
+#pragma mark - UINavigationBarDelegate
+
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showMapView"]){
+        ZZAMapViewController *controller = segue.destinationViewController;
+        controller.transitioningDelegate = self;
+        controller.venue = self.venue;
     }
 }
 
@@ -243,22 +266,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"showMapView"]){
-        ZZAMapViewController *controller = segue.destinationViewController;
-        controller.transitioningDelegate = self;
-        controller.venue = self.venue;
-    }
-}
-
-#pragma mark - UINavigationBarDelegate
-
-- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
-{
-    return UIBarPositionTopAttached;
 }
 
 - (void)dealloc

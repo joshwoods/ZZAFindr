@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F724735A19B9420B006E6DD6 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F724735919B9420B006E6DD6 /* UIImageEffects.m */; };
+		F73CBC4519B8205D0040B9C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73CBC4419B8205D0040B9C7 /* CoreLocation.framework */; };
 		F754CA3D19B23D1300FE127C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F754CA3C19B23D1300FE127C /* UIImage+ImageEffects.m */; };
 		F754CA4019B2816A00FE127C /* ZZAPresentController.m in Sources */ = {isa = PBXBuildFile; fileRef = F754CA3F19B2816A00FE127C /* ZZAPresentController.m */; };
 		F75EE9EC19A5914100F943DC /* ZZAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */; };
 		F75EE9EE19A5919B00F943DC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75EE9ED19A5919A00F943DC /* MapKit.framework */; };
-		F77BC3B6190D8A21008F5167 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */; };
 		F77F8EAA192046E700767290 /* ZZACategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F77F8EA9192046E700767290 /* ZZACategory.m */; };
+		F794DB8C19B81A7700430587 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F794DB8B19B81A7700430587 /* Images.xcassets */; };
 		F7C944BF19B1629D009386E3 /* ZZADismissController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C944BE19B1629D009386E3 /* ZZADismissController.m */; };
 		F7C944C219B18432009386E3 /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C944C119B18432009386E3 /* PlaceAnnotation.m */; };
+		F7D579C919B8077400329D72 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7D579C819B8077400329D72 /* Default-568h@2x.png */; };
 		F7E0919E190D8020005A967A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0919D190D8020005A967A /* Foundation.framework */; };
 		F7E091A0190D8020005A967A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0919F190D8020005A967A /* CoreGraphics.framework */; };
 		F7E091A2190D8020005A967A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E091A1190D8020005A967A /* UIKit.framework */; };
@@ -22,7 +25,6 @@
 		F7E091AA190D8020005A967A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091A9190D8020005A967A /* main.m */; };
 		F7E091AE190D8020005A967A /* ZZAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E091AD190D8020005A967A /* ZZAAppDelegate.m */; };
 		F7E091B1190D8020005A967A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7E091AF190D8020005A967A /* Main.storyboard */; };
-		F7E091B6190D8020005A967A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7E091B5190D8020005A967A /* Images.xcassets */; };
 		F7E091BD190D8020005A967A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E091BC190D8020005A967A /* XCTest.framework */; };
 		F7E091BE190D8020005A967A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0919D190D8020005A967A /* Foundation.framework */; };
 		F7E091BF190D8020005A967A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E091A1190D8020005A967A /* UIKit.framework */; };
@@ -47,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F724735819B9420B006E6DD6 /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
+		F724735919B9420B006E6DD6 /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
+		F73CBC4419B8205D0040B9C7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F754CA3B19B23D1300FE127C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		F754CA3C19B23D1300FE127C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		F754CA3E19B2816A00FE127C /* ZZAPresentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAPresentController.h; sourceTree = "<group>"; };
@@ -54,13 +59,14 @@
 		F75EE9EA19A5914100F943DC /* ZZAMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAMapViewController.h; sourceTree = "<group>"; };
 		F75EE9EB19A5914100F943DC /* ZZAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAMapViewController.m; sourceTree = "<group>"; };
 		F75EE9ED19A5919A00F943DC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F77F8EA8192046E700767290 /* ZZACategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZACategory.h; sourceTree = "<group>"; };
 		F77F8EA9192046E700767290 /* ZZACategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZACategory.m; sourceTree = "<group>"; };
+		F794DB8B19B81A7700430587 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F7C944BD19B1629D009386E3 /* ZZADismissController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZADismissController.h; sourceTree = "<group>"; };
 		F7C944BE19B1629D009386E3 /* ZZADismissController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZADismissController.m; sourceTree = "<group>"; };
 		F7C944C019B18432009386E3 /* PlaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceAnnotation.h; sourceTree = "<group>"; };
 		F7C944C119B18432009386E3 /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceAnnotation.m; sourceTree = "<group>"; };
+		F7D579C819B8077400329D72 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F7E0919A190D8020005A967A /* ZZAFindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZZAFindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7E0919D190D8020005A967A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F7E0919F190D8020005A967A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -72,7 +78,6 @@
 		F7E091AC190D8020005A967A /* ZZAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZAAppDelegate.h; sourceTree = "<group>"; };
 		F7E091AD190D8020005A967A /* ZZAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZAAppDelegate.m; sourceTree = "<group>"; };
 		F7E091B0190D8020005A967A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F7E091B5190D8020005A967A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F7E091BB190D8020005A967A /* ZZAFindrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZZAFindrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7E091BC190D8020005A967A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F7E091C4190D8020005A967A /* ZZAFindrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ZZAFindrTests-Info.plist"; sourceTree = "<group>"; };
@@ -97,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F73CBC4519B8205D0040B9C7 /* CoreLocation.framework in Frameworks */,
 				F75EE9EE19A5919B00F943DC /* MapKit.framework in Frameworks */,
 				F7E091A0190D8020005A967A /* CoreGraphics.framework in Frameworks */,
 				F7E091A2190D8020005A967A /* UIKit.framework in Frameworks */,
@@ -120,7 +126,7 @@
 		F7E09191190D8020005A967A = {
 			isa = PBXGroup;
 			children = (
-				F77BC3B5190D8A21008F5167 /* Default-568h@2x.png */,
+				F7D579C819B8077400329D72 /* Default-568h@2x.png */,
 				F7E091A3190D8020005A967A /* ZZAFindr */,
 				F7E091C2190D8020005A967A /* ZZAFindrTests */,
 				F7E0919C190D8020005A967A /* Frameworks */,
@@ -140,6 +146,7 @@
 		F7E0919C190D8020005A967A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F73CBC4419B8205D0040B9C7 /* CoreLocation.framework */,
 				F75EE9ED19A5919A00F943DC /* MapKit.framework */,
 				F7E0919D190D8020005A967A /* Foundation.framework */,
 				F7E0919F190D8020005A967A /* CoreGraphics.framework */,
@@ -152,10 +159,12 @@
 		F7E091A3190D8020005A967A /* ZZAFindr */ = {
 			isa = PBXGroup;
 			children = (
+				F794DB8B19B81A7700430587 /* Images.xcassets */,
+				F724735819B9420B006E6DD6 /* UIImageEffects.h */,
+				F724735919B9420B006E6DD6 /* UIImageEffects.m */,
 				F7E091AC190D8020005A967A /* ZZAAppDelegate.h */,
 				F7E091AD190D8020005A967A /* ZZAAppDelegate.m */,
 				F7E091AF190D8020005A967A /* Main.storyboard */,
-				F7E091B5190D8020005A967A /* Images.xcassets */,
 				F7E091D5190D80C9005A967A /* ZZAMainViewController.h */,
 				F7E091D6190D80C9005A967A /* ZZAMainViewController.m */,
 				F7E091DB190D8122005A967A /* ZZATableViewController.h */,
@@ -178,9 +187,9 @@
 				F7C944BE19B1629D009386E3 /* ZZADismissController.m */,
 				F754CA3B19B23D1300FE127C /* UIImage+ImageEffects.h */,
 				F754CA3C19B23D1300FE127C /* UIImage+ImageEffects.m */,
-				F7E091A4190D8020005A967A /* Supporting Files */,
 				F7C944C019B18432009386E3 /* PlaceAnnotation.h */,
 				F7C944C119B18432009386E3 /* PlaceAnnotation.m */,
+				F7E091A4190D8020005A967A /* Supporting Files */,
 			);
 			path = ZZAFindr;
 			sourceTree = "<group>";
@@ -294,8 +303,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7E091B6190D8020005A967A /* Images.xcassets in Resources */,
-				F77BC3B6190D8A21008F5167 /* Default-568h@2x.png in Resources */,
+				F7D579C919B8077400329D72 /* Default-568h@2x.png in Resources */,
+				F794DB8C19B81A7700430587 /* Images.xcassets in Resources */,
 				F7E091A8190D8020005A967A /* InfoPlist.strings in Resources */,
 				F7E091B1190D8020005A967A /* Main.storyboard in Resources */,
 			);
@@ -324,6 +333,7 @@
 				F7C944BF19B1629D009386E3 /* ZZADismissController.m in Sources */,
 				F7EF95A919205F6F00ACFDD7 /* ZZAReview.m in Sources */,
 				F7E091D7190D80C9005A967A /* ZZAMainViewController.m in Sources */,
+				F724735A19B9420B006E6DD6 /* UIImageEffects.m in Sources */,
 				F7E091AE190D8020005A967A /* ZZAAppDelegate.m in Sources */,
 				F7C944C219B18432009386E3 /* PlaceAnnotation.m in Sources */,
 				F7E091DD190D8122005A967A /* ZZATableViewController.m in Sources */,

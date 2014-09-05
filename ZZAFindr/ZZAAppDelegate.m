@@ -13,8 +13,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    self.firstVC = [[ZZAMainViewController alloc] init];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.firstVC];
     return YES;
 }
 

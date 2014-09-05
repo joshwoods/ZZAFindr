@@ -15,15 +15,17 @@
 @property (nonatomic, strong) NSMutableArray *nearbyVenues;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *aboutButton;
-@property (weak, nonatomic) IBOutlet UILabel *closestOrNoneLabel;
-@property (weak, nonatomic) IBOutlet UILabel *moreResultsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *feedMeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *venuesInformationLabel;
-@property (weak, nonatomic) IBOutlet UIButton *moreResultsButton;
-@property (weak, nonatomic) IBOutlet UIButton *restartButton;
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic) UIImage *image;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UIButton *aboutButton;
+@property (strong, nonatomic) IBOutlet UILabel *closestOrNoneLabel;
+@property (strong, nonatomic) IBOutlet UILabel *moreResultsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *feedMeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *venuesInformationLabel;
+@property (strong, nonatomic) IBOutlet UIButton *moreResultsButton;
+@property (strong, nonatomic) IBOutlet UIButton *restartButton;
+@property (strong, nonatomic) IBOutlet UIButton *searchButton;
 
 - (IBAction)resetLocation:(id)sender;
 
