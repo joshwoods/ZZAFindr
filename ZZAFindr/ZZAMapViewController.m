@@ -36,7 +36,8 @@
 
 - (IBAction)getDirections
 {
-    [self updateMap];
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:_globalPlacemark];
+    [mapItem openInMapsWithLaunchOptions:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated

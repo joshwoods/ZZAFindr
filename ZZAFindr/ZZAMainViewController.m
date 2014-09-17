@@ -6,14 +6,34 @@
 //  Copyright (c) 2014 sdoowhsoj. All rights reserved.
 //
 
-#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-#import "ZZAMainViewController.h"
-#import "ZZAVenue.h"
 #define ywsid @"uhdAgMc2ViejHvGQixqfuQ"
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+#import "ZZAVenue.h"
+#import "ZZAMainViewController.h"
 #import "ZZATableViewController.h"
+#import "ZZAVenueDetailViewController.h"
+#import "ZZAAboutViewController.h"
+#import "ZZADismissController.h"
+#import "ZZARightLeftPresentController.h"
 #import "UIImageEffects.h"
 
-@interface ZZAMainViewController () <UICollisionBehaviorDelegate>
+@interface ZZAMainViewController ()
+
+@property (nonatomic, strong) NSMutableArray *nearbyVenues;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) UIImage *image;
+
+@property (strong, nonatomic) IBOutlet UINavigationBar *navBar;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UILabel *closestOrNoneLabel;
+@property (strong, nonatomic) IBOutlet UILabel *moreResultsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *feedMeLabel;
+@property (strong, nonatomic) IBOutlet UIButton *venueInformationButton;
+@property (strong, nonatomic) IBOutlet UIButton *moreResultsButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *restartButton;
+@property (strong, nonatomic) IBOutlet UIButton *searchButton;
+@property (strong, nonatomic) UIButton *booton;
 
 @end
 
@@ -25,13 +45,19 @@
     UIDynamicAnimator *_animator;
     UIGravityBehavior *_gravity;
     UICollisionBehavior *_collision;
+    ZZADismissController *_dismissViewController;
+    ZZARightLeftPresentController *_rightLeftPresentController;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        _dismissViewController = [ZZADismissController new];
+        _rightLeftPresentController = [ZZARightLeftPresentController new];
+    }
+    return self;
 }
 
 #pragma mark IBActions
-
-- (IBAction)moreResults:(id)sender{
-    [self performSegueWithIdentifier:@"tableViewSegue" sender:self];
-}
 
 - (IBAction)resetLocation:(id)sender
 {
@@ -41,14 +67,12 @@
     [self.locationManager startUpdatingLocation];
 }
 
-- (IBAction)searchForPizza:(id)sender{
+- (void)searchForPizza{
     [self.activityIndicator startAnimating];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [self.locationManager startUpdatingLocation];
-    self.searchButton.alpha = .35;
+    self.booton.alpha = .35;
     self.feedMeLabel.text = @"";
-    self.searchButton.enabled = NO;
+    self.booton.enabled = NO;
+    [self.locationManager startUpdatingLocation];
 }
 
 #pragma mark JSON Parsing
@@ -74,7 +98,7 @@
 {
     self.closestOrNoneLabel.hidden = YES;
     self.moreResultsLabel.hidden = YES;
-    self.venuesInformationLabel.hidden = YES;
+    self.venueInformationButton.hidden = YES;
     self.moreResultsButton.hidden = YES;
     self.restartButton.enabled = NO;
 }
@@ -83,7 +107,7 @@
 {
     self.feedMeLabel.hidden = NO;
     self.closestOrNoneLabel.hidden = NO;
-    self.venuesInformationLabel.hidden = NO;
+    self.venueInformationButton.hidden = NO;
     self.restartButton.enabled = YES;
     self.moreResultsLabel.hidden = NO;
     self.moreResultsButton.hidden = NO;
@@ -93,22 +117,22 @@
 {
     if(self.nearbyVenues.count == 2){
         ZZAVenue *closest = self.nearbyVenues[0];
-        self.venuesInformationLabel.text = [NSString stringWithFormat:@"%@", closest.name];
+        [self.venueInformationButton setTitle:closest.name forState:UIControlStateNormal];
         self.moreResultsLabel.text = [NSString stringWithFormat:@"There is 1 more restaurant near you!"];
         [self.moreResultsButton.layer addAnimation:theAnimation forKey:@"animateOpacity"];
     } else if(self.nearbyVenues.count >= 3){
         ZZAVenue *closest = self.nearbyVenues[0];
-        self.venuesInformationLabel.text = [NSString stringWithFormat:@"%@", closest.name];
+        [self.venueInformationButton setTitle:closest.name forState:UIControlStateNormal];
         self.moreResultsLabel.text = [NSString stringWithFormat:@"There are %lu more restaurants near you!", (long)(self.nearbyVenues.count - 1)];
         [self.moreResultsButton.layer addAnimation:theAnimation forKey:@"animateOpacity"];
     } else if (self.nearbyVenues.count == 1){
         ZZAVenue *closest = self.nearbyVenues[0];
-        self.venuesInformationLabel.text = [NSString stringWithFormat:@"%@", closest.name];
+        [self.venueInformationButton setTitle:closest.name forState:UIControlStateNormal];
         self.moreResultsLabel.text = @"There is only 1 restaurant near you!";
         [self.moreResultsButton.layer addAnimation:theAnimation forKey:@"animateOpacity"];
     } else {
         self.closestOrNoneLabel.text = @"There is no pizza near you!";
-        self.venuesInformationLabel.hidden = YES;
+        self.venueInformationButton.hidden = NO;
         self.moreResultsLabel.text = @"Click refresh or More to try again!";
         self.moreResultsButton.hidden = YES;
     }
@@ -127,7 +151,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self setupNavBar];
     self.image = [UIImage imageNamed:@"background"];
+    [self.searchButton setTitle:@"" forState:UIControlStateNormal];
     [self updateImage:nil];
     UIGraphicsBeginImageContextWithOptions(self.image.size, NO, self.image.scale);
     [self.image drawAtPoint:CGPointZero];
@@ -135,34 +161,64 @@
     UIGraphicsEndImageContext();
 }
 
-- (void)updateImage:(id)sender
-{
-    UIImage *effectImage = nil;
-    effectImage = [UIImageEffects imageByApplyingDarkEffectToImage:self.image];
-    self.imageView.image = effectImage;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"MAIN VIEW STARTED");
     self.nearbyVenues = [[NSMutableArray alloc] init];
-    self.locationManager = [[CLLocationManager alloc] init];
     [self setLabelsToBlank];
     self.feedMeLabel.text = @"Click the Pizza below to search!";
     [self theAnimation];
-    NSLog(@"VIEW DID APPEAR");
+    NSLog(@"MAIN VIEW DID APPEAR");
+    _locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self setupInitialSearchButtonAnimation];
+}
+
+- (void)setupNavBar
+{
+    [self.navBar setBackgroundImage:[UIImage new]
+                      forBarMetrics:UIBarMetricsDefault];
+    self.navBar.shadowImage = [UIImage new];
+    self.navBar.translucent = YES;
+    self.navBar.backgroundColor = [UIColor clearColor];
+}
+
+- (void)updateImage:(id)sender
+{
+    UIImage *effectImage = nil;
+    effectImage = [UIImageEffects imageByApplyingDarkEffectToImage:self.image];
+    self.imageView.image = effectImage;
+    self.venueInformationButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.venueInformationButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+}
+
+#pragma mark - Setup the Search Button Animation
+
+- (void)setupInitialSearchButtonAnimation{
+    self.booton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.booton setImage:[UIImage imageNamed:@"pizza"] forState:UIControlStateNormal];
+    self.booton.contentMode = UIViewContentModeScaleAspectFit;
+    self.booton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.booton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    self.booton.frame = CGRectMake((self.view.frame.size.width - 220)/2, 0, 220, 220);
+    [self.booton addTarget:self action:@selector(searchForPizza) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.booton];
     
     UIView *barrier = [[UIView alloc] initWithFrame:CGRectMake(0, 380, 320, 20)];
     barrier.backgroundColor = [UIColor clearColor];
     [self.view addSubview:barrier];
     
     _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
-    _gravity = [[UIGravityBehavior alloc] initWithItems:@[self.searchButton]];
+    _gravity = [[UIGravityBehavior alloc] initWithItems:@[self.booton]];
     [_animator addBehavior:_gravity];
     
-    _collision = [[UICollisionBehavior alloc] initWithItems:@[self.searchButton]];
+    _collision = [[UICollisionBehavior alloc] initWithItems:@[self.booton]];
     _collision.translatesReferenceBoundsIntoBoundary = YES;
     
     CGPoint rightEdge = CGPointMake(barrier.frame.origin.x + barrier.frame.size.width, barrier.frame.origin.y);
@@ -170,14 +226,15 @@
     [_animator addBehavior:_collision];
     
     UIDynamicItemBehavior* itemBehaviour =
-    [[UIDynamicItemBehavior alloc] initWithItems:@[self.searchButton]];
+    [[UIDynamicItemBehavior alloc] initWithItems:@[self.booton]];
     itemBehaviour.elasticity = 0.7;
     [_animator addBehavior:itemBehaviour];
     _collision.collisionDelegate = self;
     
-    UIDynamicItemBehavior *itemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.searchButton]];
+    UIDynamicItemBehavior *itemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.booton]];
     itemBehavior.elasticity = 0.4;
     [_animator addBehavior:itemBehavior];
+    NSLog(@"%f", self.searchButton.frame.size.height);
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -194,10 +251,10 @@
                                initWithTitle:@"Uh oh..." message:@"Looks like there is an error getting your location.\n\n Check your settings or try again later!\n\n If the problem persists, please contact me ASAP on twitter @sdoowhsoj!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [self.locationManager stopUpdatingLocation];
     [self.activityIndicator stopAnimating];
-    self.searchButton.alpha = 1;
+    self.booton.alpha = 1;
     self.feedMeLabel.text = @"Click the Pizza below to search!";
     [errorAlert show];
-    self.searchButton.enabled = YES;
+    self.booton.enabled = YES;
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -207,7 +264,7 @@
     userLatitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude];
     userLongitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
     [self.locationManager stopUpdatingLocation];
-    NSString *singleURLString = [NSString stringWithFormat:@"http://api.yelp.com/business_review_search?term=pizza&lat=%@&long=%@&radius=20&limit=100&ywsid=%@", userLatitude, userLongitude, ywsid];
+    NSString *singleURLString = [NSString stringWithFormat:@"http://api.yelp.com/business_review_search?term=pizza&lat=%@&long=%@&radius=15&limit=100&ywsid=%@", userLatitude, userLongitude, ywsid];
     NSURL *singleAPIUrl = [NSURL URLWithString:singleURLString];
     dispatch_async(kBgQueue, ^{
         NSData* singleData = [NSData dataWithContentsOfURL:singleAPIUrl];
@@ -279,8 +336,27 @@
     }] mutableCopy];
     
     [self.activityIndicator stopAnimating];
-    [self undoBlankLabels];
     [self verbiageLogic];
+    [self undoBlankLabels];
+}
+
+#pragma mark - Animation Delegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return _dismissViewController;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return _rightLeftPresentController;
+}
+
+#pragma mark - UINavigationBarDelegate
+
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
 }
 
 #pragma Segue Info
@@ -290,7 +366,17 @@
     if([segue.identifier isEqualToString:@"tableViewSegue"])
     {
         ZZATableViewController *transferViewController = segue.destinationViewController;
+        transferViewController.transitioningDelegate = self;
         transferViewController.allVenues = self.nearbyVenues;
+    } else if ([segue.identifier isEqualToString:@"bestResultSegue"])
+    {
+        ZZAVenueDetailViewController *transferViewController = segue.destinationViewController;
+        transferViewController.transitioningDelegate = self;
+        ZZAVenue *closest = self.nearbyVenues[0];
+        transferViewController.venue = closest;
+    } else {
+        ZZAAboutViewController *transferViewController = segue.destinationViewController;
+        transferViewController.transitioningDelegate = self;
     }
 }
 

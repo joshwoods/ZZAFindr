@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ZZAVenue.h"
 
-@interface ZZATableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate>
+@interface ZZATableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) ZZAVenue *venue;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;

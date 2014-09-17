@@ -11,15 +11,26 @@
 #import "ZZAVenueDetailViewController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageEffects.h"
+#import "ZZADismissController.h"
 
 @interface ZZATableViewController ()
 
 @end
 
 @implementation ZZATableViewController
+{
+    ZZADismissController *_dismissViewController;
+}
 
 - (IBAction)closeScreen:(id)sender{
     [self dismissViewControllerAnimated: YES completion: nil];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        _dismissViewController = [ZZADismissController new];
+    }
+    return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -103,12 +114,20 @@
     return UIBarPositionTopAttached;
 }
 
+#pragma mark - Animation Delegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return _dismissViewController;
+}
+
 #pragma mark Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"selectRow"]) {
         ZZAVenueDetailViewController *controller = segue.destinationViewController;
+        controller.transitioningDelegate = self;
         controller.venue = self.venue;
     }
 }

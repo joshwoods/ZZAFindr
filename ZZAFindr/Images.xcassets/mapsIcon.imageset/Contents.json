@@ -3,12 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "MyMapsBarIcon-Selected.png"
+      "filename" : "mapsIcon.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "MyMapsBarIcon-Selected@2x.png"
+      "filename" : "mapsIcon@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "mapsIcon@3x.png"
     }
   ],
   "info" : {

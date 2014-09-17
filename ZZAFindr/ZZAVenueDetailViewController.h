@@ -12,7 +12,6 @@
 
 @interface ZZAVenueDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate>
 
-@property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic) UIImage *image;
 @property (nonatomic, weak) ZZAVenue *venue;

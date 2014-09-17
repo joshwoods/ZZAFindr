@@ -20,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *mapsButton;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
 
 @end
 
@@ -63,6 +64,7 @@
     self.nameLabel.text = self.venue.name;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor colorWithRed:1 green:0.941 blue:0.784 alpha:0.1];
+    [self setupNavBar];
 }
 
 - (void)updateImage:(id)sender
@@ -77,9 +79,9 @@
     [super viewDidLoad];
     NSLog(@"%@", self.venue.excerpt);
     self.tableView.delegate = self;
-    self.navBar.delegate = self;
     _reviewIsVisible = NO;
     self.addressLabel.text = self.venue.address;
+    _phoneNumber = self.venue.phoneNumber;
 }
 
 #pragma mark TableView Info
@@ -96,7 +98,10 @@
         UILabel *phone = (UILabel *)[cell viewWithTag:1001];
         UILabel *phoneNumberLabel = (UILabel *)[cell viewWithTag:1002];
         if(self.venue.phoneNumber != nil){
-            phoneNumberLabel.text = self.venue.phoneNumber;
+            NSString *string = [self.venue.phoneNumber substringWithRange:NSMakeRange(0, 3)];
+            NSString *string2 = [self.venue.phoneNumber substringWithRange:NSMakeRange(3, 3)];
+            NSString *string3 = [self.venue.phoneNumber substringWithRange:NSMakeRange(6, 4)];
+            phoneNumberLabel.text = [NSString stringWithFormat:@"%@-%@-%@", string, string2, string3];
         } else {
             phoneNumberLabel.text = @"N/A";
         }
@@ -196,6 +201,15 @@
     }
 }
 
+- (void)setupNavBar
+{
+    [self.navBar setBackgroundImage:[UIImage new]
+                      forBarMetrics:UIBarMetricsDefault];
+    self.navBar.shadowImage = [UIImage new];
+    self.navBar.translucent = YES;
+    self.navBar.backgroundColor = [UIColor clearColor];
+}
+
 - (void)showReview
 {
     UILabel *excerpt = (UILabel *)[self.view viewWithTag:1005];
@@ -260,6 +274,11 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
     return _presentViewController;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning
